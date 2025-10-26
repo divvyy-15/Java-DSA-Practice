@@ -1,6 +1,5 @@
 package com.practice;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Assignment_02_first_java {
@@ -60,10 +59,12 @@ public class Assignment_02_first_java {
         isStringPalindrome(s);*/
 
 //9. To find Armstrong Number between two given number
+        //An Armstrong number is a number that is equal to the sum of its own digits, each raised to the power of the total number of digits
+
         System.out.println("Enter two numbers:");
         int a = input.nextInt();
         int b = input.nextInt();
-        printArmstrongNumberInTheGivenRange(a,b);
+        //printArmstrongNumberInTheGivenRange(a,b);
     }
 
     public static void isEvenOrOdd(int num)
@@ -149,23 +150,5 @@ public class Assignment_02_first_java {
         }
     }
 
-    public static void printArmstrongNumberInTheGivenRange(int a,int b)
-    {
-        int rem = 0;
-        double sum = 0;
-        for(int i=a;i<=b;i++)
-        {
-            while(i>0)
-            {
-                rem = i%10; //101%10 -- 1
-                sum = sum + Math.pow(rem,3);
-                i = i/10;
-                if(sum==i)
-                {
-                    System.out.print(i);
-                }
-            }
 
-        }
-    }
 }
