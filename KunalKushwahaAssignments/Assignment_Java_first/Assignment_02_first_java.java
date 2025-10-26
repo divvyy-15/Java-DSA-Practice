@@ -64,7 +64,7 @@ public class Assignment_02_first_java {
         System.out.println("Enter two numbers:");
         int a = input.nextInt();
         int b = input.nextInt();
-        //printArmstrongNumberInTheGivenRange(a,b);
+        printArmstrongNumberInTheGivenRange(a,b);
     }
 
     public static void isEvenOrOdd(int num)
@@ -150,5 +150,26 @@ public class Assignment_02_first_java {
         }
     }
 
+    public static void printArmstrongNumberInTheGivenRange(int a,int b)
+    {
+        for(int i=a;i<=b;i++)
+        {
+            int rem = 0;
+            int sum = 0;
+            int temp = i;
+            int digits = String.valueOf(i).length();
+            while(temp>0)
+            {
+                rem = temp%10; //101%10 -- 1
+                sum = (int) (sum + Math.pow(rem,digits));
+                temp = temp/10;
+            }
+            if(sum==i)
+            {
+                System.out.print(i +" ");
+            }
+
+        }
+    }
 
 }
