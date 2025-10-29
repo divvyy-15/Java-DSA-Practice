@@ -30,17 +30,23 @@ public class Assignment_03_conditionals_loops {
 
 //6. Factorial Program In Java
         int n = 10;
-        System.out.println("Factorial of "+ n + " is: "+factorialOfANumber(n));
+        //System.out.println("Factorial of "+ n + " is: "+factorialOfANumber(n));
 
 //7. Calculate Average Of N Numbers
+        System.out.println("Average of all the entered numbers is: "+avgOfEnteredNums());
 
 //8. Sum Of N Numbers
+        System.out.println("sum of all the numbers entered is: "+sumOfAllEnteredNumbers());
 
 //9. Reverse A String In Java
+        System.out.println("The reverse of the entered String is: "+reverseEnteredString("Euphoria"));
 
 //10. Find if a number is palindrome or not
+        System.out.println("Is the given number a Palindrome? "+isPalindrome(1212));
 
 //11. Perfect Number In Java
+//A perfect number is a positive integer that is equal to the sum of its proper positive divisors
+// (the divisors excluding the number itself)
 
 //12. Check Leap Year Or Not
 
@@ -143,10 +149,85 @@ public class Assignment_03_conditionals_loops {
 
     public static int factorialOfANumber(int num)
     {
-        int fact = 1;
+        int fact = 1;          //long or BigInteger for greater numbers say n>12
         for(int i=1;i<=num;i++) {
             fact = fact * i;
         }
         return fact;
+    }
+
+    public static double avgOfEnteredNums()
+    {
+        Scanner inp = new Scanner(System.in);
+        int sum = 0;
+        int count=0;
+        double avg = 0.0;//avg=sum/total
+        while(true)
+        {
+            System.out.println("Enter any number(when 0 is entered program stops): ");
+            int num = inp.nextInt();
+            if(num==0)
+            {
+                avg = 0.0;
+                break;
+            }
+            else {
+                sum = sum + num;
+                count++;
+            }
+        }
+        if(count>0)
+        {
+            avg = (double) sum/count;
+        }
+        return avg;
+    }
+
+    public static int sumOfAllEnteredNumbers()
+    {
+        int sum = 0;
+        Scanner inp = new Scanner(System.in);
+        while(true)
+        {
+            System.out.println("Enter any number(when 0 is entered program stops): ");
+            int num = inp.nextInt();
+            if(num==0)
+            {
+                break;
+            }
+            else {
+                sum = sum + num;
+            }
+        }
+        return sum;
+    }
+
+    public static String reverseEnteredString(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        for(int i =s.length()-1;i>=0;i--)
+        {
+            sb.append(s.charAt(i));
+        }
+        return sb.toString().toLowerCase();
+    }
+
+    public static String isPalindrome(int num)
+    {
+        int original = num;
+        int rev = 0;
+        while(num>0)
+        {
+            int rem = num%10;
+            rev = rev *10 + rem;
+            num = num/10;
+        }
+        if(original== rev)
+        {
+            return "Yes!";
+        }
+        else {
+            return "No!";
+        }
     }
 }
