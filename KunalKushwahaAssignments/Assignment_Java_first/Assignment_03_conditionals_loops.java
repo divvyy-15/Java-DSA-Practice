@@ -30,7 +30,7 @@ public class Assignment_03_conditionals_loops {
 
 //6. Factorial Program In Java
         int n = 10;
-        //System.out.println("Factorial of "+ n + " is: "+factorialOfANumber(n));
+        System.out.println("Factorial of "+ n + " is: "+factorialOfANumber(n));
 
 //7. Calculate Average Of N Numbers
         System.out.println("Average of all the entered numbers is: "+avgOfEnteredNums());
@@ -47,14 +47,21 @@ public class Assignment_03_conditionals_loops {
 //11. Perfect Number In Java
 //A perfect number is a positive integer that is equal to the sum of its proper positive divisors
 // (the divisors excluding the number itself)
-
+        System.out.println("Is the given number a perfect number? "+isPerfect(4));
 //12. Check Leap Year Or Not
+        System.out.println("Is given year a leap year? "+isLeapYear(2023));
 
 //13. Sum Of A Digits Of Number
+        System.out.println("Sum of digits of the entered number is: "+sumOfDigits(12345));
 
-//14. Kunal is allowed to go out with his friends only on the even days of a given month. Write a program to count the number of days he can go out in the month of August
+//14. Kunal is allowed to go out with his friends only on the even days of a given month.
+// Write a program to count the number of days he can go out in the month of August
+        System.out.println("Number of days Kunal can go out in the month of August: "+countOutDays(31));
 
-//15. Write a program to print the sum of negative numbers, sum of positive even numbers and the sum of positive odd numbers from a list of numbers (N) entered by the user. The list terminates when the user enters a zero
+//15. Write a program to print the sum of negative numbers, sum of positive even numbers and the sum of
+// positive odd numbers from a list of numbers (N) entered by the user. The list terminates when the user
+// enters a zero
+        sumOfEnteredNumbers();
 
     }
 
@@ -229,5 +236,88 @@ public class Assignment_03_conditionals_loops {
         else {
             return "No!";
         }
+    }
+
+    public static String isPerfect(int num)
+    {
+        if(num<=1)
+        {
+            return "No";
+        }
+        int sum = 1; //as 1 is universal divisor
+        for(int i=2;i<=num/2;i++)
+        {
+            if(num%i==0)
+            {
+                System.out.println("Divisor: "+i);
+                sum = sum+i;
+            }
+        }
+        if(sum==num)
+        {
+            return "Yes";
+        }
+        else {
+            return "No";
+        }
+    }
+
+    public static int sumOfDigits(int num)
+    {
+        int sum = 0;
+        while(num>0)
+        {
+            int rem = num%10;
+            sum = sum + rem;
+            num = num/10;
+        }
+        return sum;
+    }
+
+    public static String isLeapYear(int year)
+    {
+        if((year%4==0 && year%100!=0) || year%400==0)
+        {
+            return "Yes!";
+        }
+        else {
+            return "No!";
+        }
+    }
+
+    public static int countOutDays(int noOfDaysInTheMonth)
+    {
+        int count = 0;
+        for(int i=1;i<=noOfDaysInTheMonth;i++)
+        {
+            if(i%2==0)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void sumOfEnteredNumbers() {
+        Scanner inp = new Scanner(System.in);
+        int sumOfNegativeNums = 0;
+        int sumOfPositiveOddNums = 0;
+        int sumOfPositiveEvenNums = 0;
+        while (true) {
+            System.out.println("Enter any number(when 0 is entered program stops): ");
+            int num = inp.nextInt();
+            if (num == 0) {
+                break;
+            } else if (num < 0) {
+                sumOfNegativeNums = sumOfNegativeNums + num;
+            } else if (num % 2 == 0) {
+                sumOfPositiveEvenNums = sumOfPositiveEvenNums + num;
+            } else {
+                sumOfPositiveOddNums = sumOfPositiveOddNums + num;
+            }
+        }
+        System.out.println("Out of all the entered numbers, sum of negative numbers is: "+sumOfNegativeNums);
+        System.out.println("Out of all the entered numbers, sum of Positive even numbers is: "+sumOfPositiveEvenNums);
+        System.out.println("Out of all the entered numbers, sum of Positive odd numbers is: "+sumOfPositiveOddNums);
     }
 }
