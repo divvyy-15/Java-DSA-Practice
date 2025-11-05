@@ -6,23 +6,44 @@ import java.util.Scanner;
 public class Array_Fundamentals {
 
     public static void main(String[] args) {
-//Create array of 10 numbers and print all elements
+//1. Create array of 10 numbers and print all elements
         int[] arr1 = {1,2,3,4,5,6,7,8,9,10};
         printArray(arr1);
 
-//Take array input from user (using Scanner)
+//2. Take array input from user (using Scanner)
         takeArrayInpFromUserAndPrint(4);
 
-//Print array in reverse order
+//3. Print array in reverse order
         printInRevOrder(arr1);
 
-//Find max and min element in array
+//4. Find max and min element in array
         int[] arr3 = {2,33,66,6,15};
         System.out.println("The max element in the array is: "+findMaxInArray(arr3));
         System.out.println("The min element in the array is: "+findMinInArray(arr3));
 
-//Calculate sum and average of array elements
+//5. Calculate sum and average of array elements
         findSumAndAvgOfEleInArray(arr3);
+
+//6. Print all even numbers from array
+        int[] arr4 = {2,22,13,11,15,66,19,96};
+        printEvenNumsFromArray(arr4);
+
+//7. Print all odd numbers
+        printOddNumsFromArray(arr4);
+
+//8. Count how many positive vs negative numbers
+        int[] arr5 = {-1,15,-15,2,3,-100,56,67,78,-98,-99};
+        printCountOfPosNegInArray(arr5);
+
+//9. Find if specific element exists
+        int findEle = 5;
+        System.out.println(findEle + " exists in the array? "+doesEleExistInArray(arr5,findEle));
+
+//10.Print elements at even indices only
+        printEvenIndicesEle(arr5);
+
+//11.Print elements at odd indices only
+        printOddIndicesEle(arr5);
     }
 
     public static void printArray(int[] a)
@@ -90,5 +111,83 @@ public class Array_Fundamentals {
         avg = (double) sum/a.length;
         System.out.println("Sum of all the elements in the array: "+sum);
         System.out.println("Average of all the elements in the array: "+avg);
+    }
+
+    public static void printEvenNumsFromArray(int[] a)
+    {
+        System.out.print("Even numbers in the array are: ");
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]%2==0)
+            {
+                System.out.print(a[i] + " ");
+            }
+        }
+    }
+
+    public static void printOddNumsFromArray(int[] a)
+    {
+        System.out.print("Odd numbers in the array are: ");
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]%2!=0)
+            {
+                System.out.print(a[i] + " ");
+            }
+        }
+    }
+
+    public static void printCountOfPosNegInArray(int[] a)
+    {
+        int posCount = 0;
+        int negCount = 0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]<0)
+            {
+                negCount++;
+            }
+            else {
+                posCount++;
+            }
+        }
+        System.out.println("Count of negative numbers in the array: "+ negCount);
+        System.out.println("Count of positive numbers in the array: "+posCount);
+    }
+
+    public static boolean doesEleExistInArray(int[] a,int ele)
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]==ele)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void printEvenIndicesEle(int[] a)
+    {
+        System.out.println("Elements at the even indices in the array are: ");
+        for(int i=0;i<a.length;i++)
+        {
+            if(i%2==0)
+            {
+                System.out.print(a[i] + " ");
+            }
+        }
+    }
+
+    public static void printOddIndicesEle(int[] a)
+    {
+        System.out.println("Elements at the odd indices in the array are: ");
+        for(int i=0;i<a.length;i++)
+        {
+            if(i%2!=0)
+            {
+                System.out.print(a[i] + " ");
+            }
+        }
     }
 }
