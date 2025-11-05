@@ -33,7 +33,7 @@ public class Array_Fundamentals {
 
 //8. Count how many positive vs negative numbers
         int[] arr5 = {-1,15,-15,2,3,-100,56,67,78,-98,-99};
-        printCountOfPosNegInArray(arr5);
+        findCountOfPosNegInArray(arr5);
 
 //9. Find if specific element exists
         int findEle = 5;
@@ -44,6 +44,23 @@ public class Array_Fundamentals {
 
 //11.Print elements at odd indices only
         printOddIndicesEle(arr5);
+
+//12.Print only numbers greater than 10
+        int[] arr6 = {6,2,5,12,13,15,1};
+        printNumsGreaterThan(arr6,10);
+
+//13.Find second largest element
+        System.out.println("Second largest number in the array is: "+ findSecLargestFromArray(arr6));
+
+//14.Count how many numbers are divisible by 3
+        System.out.println("There are "+countNumsDivBy(arr6,3)+ " numbers in the array that are divisible by 3!");
+
+//15.Print all elements except the first and last
+        printExcludingPositions(arr6,0,arr6.length-1);
+
+//16.Find the sum of all negative numbers
+        System.out.println("Sum of all the negative numbers in the array: "+sumOfNegNums(arr5));
+
     }
 
     public static void printArray(int[] a)
@@ -137,7 +154,7 @@ public class Array_Fundamentals {
         }
     }
 
-    public static void printCountOfPosNegInArray(int[] a)
+    public static void findCountOfPosNegInArray(int[] a)
     {
         int posCount = 0;
         int negCount = 0;
@@ -189,5 +206,69 @@ public class Array_Fundamentals {
                 System.out.print(a[i] + " ");
             }
         }
+    }
+
+    public static void printNumsGreaterThan(int[] a,int check)
+    {
+        System.out.print("Numbers greater than " +check+ " in the given array are:");
+        for(int i:a)
+        {
+            if(i>check)
+            {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    public static int findSecLargestFromArray(int[] a)
+    {
+        int lar = Integer.MIN_VALUE;
+        int secLar = Integer.MIN_VALUE;
+        for(int i:a)
+        {
+            if(i>lar)
+            {
+                secLar = lar;
+                lar = i;
+            }
+        }
+        return secLar;
+    }
+
+    public static int countNumsDivBy(int[] a,int divisor)
+    {
+        int countDiv = 0;
+        for(int i:a)
+        {
+            if(i%divisor==0)
+            {
+                countDiv++;
+            }
+        }
+        return countDiv;
+    }
+
+    public static void printExcludingPositions(int[] a, int pos1, int pos2)
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            if(i!=pos1 && i!=pos2)
+            {
+                System.out.print(a[i] + " ");
+            }
+        }
+    }
+
+    public static int sumOfNegNums(int[] a)
+    {
+        int sumNegNums = 0;
+        for(int i:a)
+        {
+            if(i<0)
+            {
+                sumNegNums = sumNegNums+i;
+            }
+        }
+        return sumNegNums;
     }
 }
