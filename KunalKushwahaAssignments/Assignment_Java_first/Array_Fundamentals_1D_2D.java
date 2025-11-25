@@ -3,7 +3,7 @@ package com.practice;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Array_Fundamentals_1D {
+public class Array_Fundamentals_1D_2D {
 
     public static void main(String[] args) {
 //1. Create array of 10 numbers and print all elements
@@ -94,7 +94,16 @@ public class Array_Fundamentals_1D {
 //23.Delete all occurrences of a number
         /*int[] arr11 = {1,2,2,3,2,4};
         System.out.println("The new size of the array is: "+deleteOccurencesOfNum(arr11,6,2));
-        System.out.println(Arrays.toString(arr11));*/
+        System.out.println("New size: " + size);  // Should print 3
+        // Print only valid elements (first 'size' elements)
+         System.out.print("Valid elements: ");
+    for(int i = 0; i < size; i++) {
+        System.out.print(arr[i] + " ");
+    }
+    System.out.println();
+    // If you print entire array:
+    System.out.println("Full array: " + Arrays.toString(arr));
+    System.out.println(Arrays.toString(arr11));*/
 
 //24.Find element and return index(-1 if not found)
         int[] arr12 = {15, 23, 8, 42, 19, 7, 33};
@@ -112,7 +121,28 @@ public class Array_Fundamentals_1D {
         //System.out.println("The element occured "+countOcc(arr13,5)+ " times in the array");
 
 //28.Find all occurrences of element (return array of indices)
-        System.out.println("The indices where the target element is found: "+Arrays.toString(allOcc(arr13,5)));
+        //System.out.println("The indices where the target element is found: "+Arrays.toString(allOcc(arr13,5)));
+
+//29.Search for element only between start and end indices
+        int[] arr14 = {10,20,30,40,50,60,70};
+        //System.out.println("The index of the element is: "+searchInRange(arr14,50,2,5));
+        //System.out.println("The index of the element is: "+searchInRange(arr14,10,2,5));
+
+//30.Binary Search
+        int[] arr15 = {2, 5, 8, 12, 16, 23, 38, 45, 56, 67, 78};
+        System.out.println("The index of the element is: "+binarySearch(arr15,23));
+        System.out.println("The index of the element is: "+binarySearch(arr15,45));
+        System.out.println("The index of the element is: "+binarySearch(arr15,99));
+
+//31.Search in 2D-array
+        int[][] arr16 = {{1,3,5,7},
+                         {10,11,16,20},
+                         {23,30,34,50}};
+        System.out.println("The indices in the 2D array for the element is: "+Arrays.toString(searchIn2DArray(arr16,16)));
+
+//32.Find the missing number in a sequence from 1 to n
+        int[] arr17 = {1,2,3,4,6,7,8};
+        System.out.println("The missing number is: "+findMissingNum(arr17));
 
     }
 
@@ -471,6 +501,68 @@ public class Array_Fundamentals_1D {
                 }
             }
         return occArr;
+    }
+
+    public static int searchInRange(int[] a,int targetEle,int startInd,int endInd)
+    {
+        if(startInd<0 || endInd>=a.length || startInd>endInd)
+        {
+            return -1;
+        }
+        for(int i=startInd;i<=endInd;i++)
+        {
+            if(a[i]==targetEle)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int binarySearch(int[] a,int targetEle)
+    {
+        int left = 0;
+        int right = a.length-1;
+
+        while(left<=right)
+        {
+            int mid = left+(right-left)/2;
+            if(a[mid]==targetEle)
+                return mid;
+            else if (a[mid]<targetEle) {
+                left = mid+1;//search in right half
+            } else {
+                right = mid-1;//search in left half
+            }
+        }
+        return -1;
+    }
+
+    public static int[] searchIn2DArray(int[][] matrix,int targetEle)
+    {
+        for(int i=0;i<matrix.length;i++)  //rows
+        {
+            for(int j=0;j<matrix[i].length;j++)     //column
+            {
+                if(matrix[i][j]==targetEle)
+                {
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return new int[]{-1,-1};
+    }
+
+    public static int findMissingNum(int[] a)
+    {
+        int n = a.length+1; //should have n numbers
+        int expSum = n*(n+1)/2;
+        int actualSum = 0;
+        for(int i=0;i<a.length;i++)
+        {
+            actualSum = actualSum+a[i];
+        }
+        return expSum-actualSum;
     }
 }
 
