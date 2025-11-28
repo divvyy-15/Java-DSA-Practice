@@ -1,9 +1,8 @@
 package com.practice;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Array_Fundamentals_1D_2D {
+public class Array_Fundamentals_1D {
 
     public static void main(String[] args) {
 //1. Create array of 10 numbers and print all elements
@@ -130,20 +129,46 @@ public class Array_Fundamentals_1D_2D {
 
 //30.Binary Search
         int[] arr15 = {2, 5, 8, 12, 16, 23, 38, 45, 56, 67, 78};
-        System.out.println("The index of the element is: "+binarySearch(arr15,23));
-        System.out.println("The index of the element is: "+binarySearch(arr15,45));
-        System.out.println("The index of the element is: "+binarySearch(arr15,99));
+        //System.out.println("The index of the element is: "+binarySearch(arr15,23));
+        //System.out.println("The index of the element is: "+binarySearch(arr15,45));
+        //System.out.println("The index of the element is: "+binarySearch(arr15,99));
 
 //31.Search in 2D-array
         int[][] arr16 = {{1,3,5,7},
                          {10,11,16,20},
                          {23,30,34,50}};
-        System.out.println("The indices in the 2D array for the element is: "+Arrays.toString(searchIn2DArray(arr16,16)));
+        //System.out.println("The indices in the 2D array for the element is: "+Arrays.toString(searchIn2DArray(arr16,16)));
 
 //32.Find the missing number in a sequence from 1 to n
         int[] arr17 = {1,2,3,4,6,7,8};
-        System.out.println("The missing number is: "+findMissingNum(arr17));
+        //System.out.println("The missing number is: "+findMissingNum(arr17));
 
+//33.Return true if array is sorted in ascending order, false otherwise
+        //int[] arr18 = {1,3,5,7,9};
+        //int[] arr18 = {1,5,3,7,9};
+        int[] arr18 = {1,3,3,7,9};
+        //System.out.println("The given array is sorted? "+isSorted(arr18));
+
+//34.Sort the array and find the median element
+/* Median definition:**
+        - Odd number of elements: Middle element
+        - Even number of elements: Average of two middle elements */
+        int[] arr19 = {7, 3, 9, 1, 5};
+        //System.out.println("The median element of the array is: "+findMedian(arr19));
+        //System.out.println("The median element of the array is: "+findMedian(new int[]{7,3,9,1,5,4}));
+
+//35.Sort and Find Kth Smallest Element (1-indexed)
+        int[] arr20 = {7,10,4,3,20,15};
+        int k = 3;
+        //System.out.println("The "+k+" th smallest element in the array is: "+findKthSmallest(arr20,k));
+
+//36.Sort first half in ascending order, second half in descending order
+        int[] arr21 = {5,2,8,1,9,3,7,4};
+        System.out.println(Arrays.toString(sortHalves(arr21)));
+
+//37.Sort Array of Strings Alphabetically (case-insensitive)
+        String[] arr22 = {"Zebra", "apple", "Banana", "cherry"};
+        //System.out.println(Arrays.toString(sortStrings(arr22)));
     }
 
     public static void printArray(int[] a)
@@ -564,5 +589,79 @@ public class Array_Fundamentals_1D_2D {
         }
         return expSum-actualSum;
     }
+
+    public static boolean isSorted(int[] a)
+    {
+        boolean isSorted = true;
+        if(a.length<=1)
+        {
+            return true;
+        }
+        for(int i=0;i<a.length-1;i++)
+        {
+            if(a[i]>a[i+1])
+            {
+                isSorted=false;
+                break;
+            }
+        }
+        return isSorted;
+    }
+
+    public static float findMedian(int[] a)
+    {
+        Arrays.sort(a);
+        float median = 0;
+        if(a.length%2!=0) //odd number of elements
+        {
+           int mid = a.length/2;
+           median = (float)a[mid];
+        }
+        else     //even number of elements
+        {
+           int mid = a.length/2;
+           median = (float)(a[mid]+a[mid-1])/2;
+        }
+            return median;
+        }
+
+    public static int findKthSmallest(int[] a,int k)
+    {
+        Arrays.sort(a);
+        if(a.length<1 || k<1 || k>a.length)
+        {
+            return -1;
+        }
+        return a[k-1];
+    }
+
+    public static void reverseArrayInPlace(int[] a,int startIndex,int endIndex)
+    {
+        int left = startIndex;
+        int right = endIndex-1;
+        while(left<right)
+        {
+            int temp = a[left];
+            a[left] = a[right];
+            a[right] = temp;
+            left++;
+            right--;
+        }
+    }
+    public static int[] sortHalves(int[] a)
+    {
+        int mid = a.length/2;
+        Arrays.sort(a,0,mid); //asc sorted,toIndex is exclusive,fromIndex is inclusive
+        Arrays.sort(a,mid,a.length);
+        reverseArrayInPlace(a,mid,a.length);
+        return a;
+    }
+
+    public static String[] sortStrings(String[] a)
+    {
+        Arrays.sort(a,String.CASE_INSENSITIVE_ORDER);
+        return a;
+    }
 }
+
 
