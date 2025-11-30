@@ -164,11 +164,27 @@ public class Array_Fundamentals_1D {
 
 //36.Sort first half in ascending order, second half in descending order
         int[] arr21 = {5,2,8,1,9,3,7,4};
-        System.out.println(Arrays.toString(sortHalves(arr21)));
+        //System.out.println(Arrays.toString(sortHalves(arr21)));
 
 //37.Sort Array of Strings Alphabetically (case-insensitive)
         String[] arr22 = {"Zebra", "apple", "Banana", "cherry"};
         //System.out.println(Arrays.toString(sortStrings(arr22)));
+
+//38.Rotate array to the right by k positions
+        int[] arr23 = {1,2,3,4,5};
+        //System.out.println(Arrays.toString(rotateRight(arr23,2)));
+
+//39.Move all zeros to the end, maintain relative order of non-zero elements
+        int[] arr24 = {0,1,0,3,12};
+        moveZerosToEnd(arr24);
+
+//40.Remove Duplicates from Sorted Array
+        int[] arr25 = {1, 1, 2, 2, 3, 4, 4};
+        System.out.println("New size of the array after removing duplicates is: "+removeDuplicates(arr25));
+
+//41.Find Second Largest Element without full sorting
+        int[] arr26 = {12, 35, 1, 10, 34, 1};
+        System.out.println("Second largest element in the array is: "+findSecondLargestInArray(arr26));
     }
 
     public static void printArray(int[] a)
@@ -652,8 +668,8 @@ public class Array_Fundamentals_1D {
     {
         int mid = a.length/2;
         Arrays.sort(a,0,mid); //asc sorted,toIndex is exclusive,fromIndex is inclusive
-        Arrays.sort(a,mid,a.length);
-        reverseArrayInPlace(a,mid,a.length);
+        Arrays.sort(a,mid,a.length); //sort the second half in asc
+        reverseArrayInPlace(a,mid,a.length); //reverse the second half in place
         return a;
     }
 
@@ -662,6 +678,68 @@ public class Array_Fundamentals_1D {
         Arrays.sort(a,String.CASE_INSENSITIVE_ORDER);
         return a;
     }
+
+    public static int[] rotateRight(int[] a,int k)
+    {
+        //Reverse entire array
+        reverseArrayInPlace(a,0,a.length);
+        //Reverse first k elements
+        reverseArrayInPlace(a,0,k);
+        //Reverse remaining elements
+        reverseArrayInPlace(a,k,a.length);
+        return a;
+    }
+
+    public static void moveZerosToEnd(int[] a)
+    {
+        int nonZeroElePos = 0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]!=0)
+            {
+                int temp = a[i];
+                a[i]=a[nonZeroElePos];
+                a[nonZeroElePos] = temp;
+                nonZeroElePos++;
+            }
+        }
+        System.out.println(Arrays.toString(a));
+    }
+
+    public static int removeDuplicates(int[] a)
+    {
+        if(a.length==0)
+            return 0;
+        int writePos = 1;
+        for(int i = 1; i< a.length; i++)
+        {
+            if(a[i] != a[i-1])
+            {
+                a[writePos] = a[i];
+                writePos++;
+            }
+        }
+        return writePos;
+    }
+
+    public static int findSecondLargestInArray(int[] a)
+    {
+        int largest = Integer.MIN_VALUE; //35
+        int secondLargest = Integer.MIN_VALUE; //12   //34
+
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]>largest)
+            {
+                secondLargest = largest;
+                largest = a[i];
+            } else if (a[i]>secondLargest && a[i]<largest) {
+                secondLargest = a[i];
+            }
+        }
+        return secondLargest;
+    }
 }
+
 
 
