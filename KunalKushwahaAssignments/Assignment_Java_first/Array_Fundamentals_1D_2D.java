@@ -2,7 +2,7 @@ package com.practice;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Array_Fundamentals_1D {
+public class Array_Fundamentals_1D_2D {
 
     public static void main(String[] args) {
 //1. Create array of 10 numbers and print all elements
@@ -185,6 +185,41 @@ public class Array_Fundamentals_1D {
 //41.Find Second Largest Element without full sorting
         int[] arr26 = {12, 35, 1, 10, 34, 1};
         System.out.println("Second largest element in the array is: "+findSecondLargestInArray(arr26));
+
+//42.Print 2D array
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        printMatrix(matrix);
+
+//43.Find max in 2D array
+        int[][] matrix1 = {
+                {3, 15, 7},
+                {12, 8, 20},
+                {5, 18, 11}
+        };
+        System.out.println("The maximum element in the array is: "+findMaxIn2DArray(matrix1));
+
+//44.Print row and columns sum
+        System.out.print("The row sums is: ");
+        printRowSums(matrix);
+        System.out.print("The column sums is: ");
+        printColumnSums(matrix);
+
+//45.Transpose the matrix
+        int[][] matrix2 = {
+                {1,2,3},
+                {4,5,6}
+        };
+        transposeMatrix(matrix2);
+
+//46.Print diagonal
+        printDiagonal(matrix);
+
+//47.Print secondary diagonal
+        printSecondaryDiagonal(matrix);
     }
 
     public static void printArray(int[] a)
@@ -738,6 +773,95 @@ public class Array_Fundamentals_1D {
             }
         }
         return secondLargest;
+    }
+
+    public static void printMatrix(int[][] a)
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=0;j<a[i].length;j++)
+            {
+                System.out.print(a[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static int findMaxIn2DArray(int[][] a)
+    {
+        int max = Integer.MIN_VALUE;
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=0;j<a[i].length;j++)
+            {
+                if(a[i][j]>max)
+                {
+                    max = a[i][j];
+                }
+            }
+        }
+        return max;
+    }
+
+    public static void printRowSums(int[][] a)
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            int sum = 0;
+            for(int j=0;j<a[i].length;j++)
+            {
+                sum = sum + a[i][j];
+            }
+            System.out.print(sum + " ");
+        }
+    }
+
+    public static void printColumnSums(int[][] a)
+    {
+        int cols = a[0].length;
+        for(int j=0;j<cols;j++)
+        {
+            int sum =0;
+            for(int i=0;i<a.length;i++)
+            {
+                sum =sum + a[i][j];
+            }
+            System.out.print(sum + " ");
+        }
+    }
+
+    public static void transposeMatrix(int[][] a)
+    {
+        int rows = a.length;
+        int cols = a[0].length;
+        int[][] resultant = new int[cols][rows];
+
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<cols;j++)
+            {
+                resultant[j][i] = a[i][j];
+            }
+        }
+        System.out.println(Arrays.deepToString(resultant));
+    }
+
+    public static void printDiagonal(int[][] a)
+    {
+        System.out.print("Diagonal elements are: ");
+        for(int i=0;i<a.length;i++)
+        {
+            System.out.print(a[i][i]+ " ");
+        }
+    }
+
+    public static void printSecondaryDiagonal(int[][] a)
+    {
+        System.out.print("Secondary Diagonal elements are: ");
+        for(int i=0;i<a.length;i++)
+        {
+            System.out.print(a[i][a.length-1-i] + " ");
+        }
     }
 }
 
