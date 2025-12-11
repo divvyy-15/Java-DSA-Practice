@@ -34,14 +34,24 @@ public class String_and_StringBuilder {
     System.out.println("Compressed string is: "+compressString(s7));
 
 //8.Check if string contains only digits
+    String s8 = "$100";
+    System.out.println("The string contains only digits: "+checkContainsOnlyDigits(s8));
 
 //9.Convert string to integer
+    String s9 = "12345";
+    System.out.println("The integer value of the string is: "+stringToInteger(s9));
 
 //10.Count words in a string
+    String s10 = "The quick brown fox";
+    System.out.println("Total number of words in the String: "+countWords(s10));
 
 //11.Reverse words in a string
+    String s11 = "The quick brown fox";
+    System.out.println("Reversed: "+reverseWords(s11));
 
 //12.Remove duplicate characters
+        String s12 = "ccoodde";
+        System.out.println("After duplicates removed: "+removeDuplicateChars(s12));
     }
 
     public static String revString(String s)
@@ -116,7 +126,7 @@ public class String_and_StringBuilder {
             freq1[index]++;
         }
 
-        //count frequency of each character in str1
+        //count frequency of each character in str2
         int[] freq2 = new int[26];
         for(int i=0;i<s2.length();i++)
         {
@@ -196,5 +206,87 @@ public class String_and_StringBuilder {
             }
         }
         return '\0'; //char literal with a value of zero
+    }
+
+    public static boolean checkContainsOnlyDigits(String s)
+    {
+        if(s.length()==0)
+        {
+            return false;
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            if(!Character.isDigit(s.charAt(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int stringToInteger(String s)
+    {
+        int result = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            //result = result*10+ Character.getNumericValue(s.charAt(i)); OR
+            result = result*10 + (s.charAt(i) - '0');
+        }
+        return result;
+    }
+
+    public static int countWords(String s)
+    {
+        int count = 1;
+        boolean inWord = false;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)!=' ')
+            {
+                if(!inWord)
+                {
+                    count++;
+                    inWord = true;
+                }
+            }
+            else {
+                inWord = false;
+            }
+        }
+        return count;
+    }
+
+    public static String reverseWords(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        String[] words = s.trim().split("\\s+");
+        for(int i=words.length-1;i>=0;i--)
+        {
+            sb.append(words[i]);
+            //Append a space after every word EXCEPT the last one.The last word appended is when i=0
+            if(i>0)
+            {
+                sb.append(" ");
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String removeDuplicateChars(String s)
+    {
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder();
+        int[] a = new int[26];
+        for(int i=0;i<s.length();i++)
+        {
+            char ch = s.charAt(i);
+            int index = ch - 'a';
+            a[index]++;
+
+            if(a[index]==1)
+            {
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString();
     }
 }
