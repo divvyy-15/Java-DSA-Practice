@@ -1,6 +1,7 @@
 package com.practice;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class leetCodeArrays {
 
@@ -291,5 +292,21 @@ public class leetCodeArrays {
             }
         }
         return writePos;
+    }
+
+    public static int[] twoSumOptimized(int[] a,int target)
+    {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<a.length;i++)
+        {
+            int complement = target - a[i];
+
+            if(map.containsKey(complement))
+            {
+                return new int[]{map.get(complement),i}; //array is created as:[index_of_complement, current_index_i]
+            }
+            map.put(a[i],i);//store number,its index
+        }
+        return null;
     }
 }
