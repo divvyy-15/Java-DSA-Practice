@@ -82,8 +82,36 @@ public class leetCodeArrays {
         int[] nums9 = {0,0,1,1,1,2,2,3,3,4};
         System.out.println("Number uf unique elements are: "+removeDuplicates(nums9));
 
-//13.
+//13.Given an integer array nums and an integer val, remove all occurrences of val in nums in-place.
+// The order of the elements may be changed. Then return the number of elements in nums which are not equal
+// to val.Consider the number of elements in nums which are not equal to val be k, to get accepted, you need
+// to do the following things:
+//A] Change the array nums such that the first k elements of nums contain the elements which are not equal to
+// val. The remaining elements of nums are not important as well as the size of nums.
+//B] Return k.
+        int[] nums10 = {0,1,2,2,3,0,4,2};
+        System.out.println("Number of unique elements are: "+removeElement(nums,2));
 
+//14.Given a sorted array of distinct integers and a target value, return the index if the target is found.
+// If not, return the index where it would be if it were inserted in order.
+//You must write an algorithm with O(log n) runtime complexity.
+        int[] nums11 = {1,3,5,6};
+        System.out.println("Number is found/can be inserted at: "+searchInsert(nums11,2));
+
+//15.You are given a large integer represented as an integer array digits, where each digits[i] is the ith
+// digit of the integer. The digits are ordered from most significant to least significant in left-to-right
+// order. The large integer does not contain any leading 0's.
+//Increment the large integer by one and return the resulting array of digits.
+        int[] nums12 = {1,2,3};
+        System.out.println("The larger integer becomes: "+Arrays.toString(plusOne(nums12)));
+
+//16.You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m
+// and n, representing the number of elements in nums1 and nums2 respectively.
+//Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+//The final sorted array should not be returned by the function, but instead be stored inside the array
+// nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements
+// that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of
+// n.
 
     }
 
@@ -308,5 +336,61 @@ public class leetCodeArrays {
             map.put(a[i],i);//store number,its index
         }
         return null;
+    }
+
+    public static int removeElement(int[] a,int val)
+    {
+        int writePos = 0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]!=val)
+            {
+                a[writePos]=a[i];
+                writePos++;
+            }
+        }
+        return writePos;
+    }
+
+    public static int searchInsert(int[] a,int target)
+    {
+        int left = 0;
+        int right = a.length-1;
+        while(left<=right)
+        {
+            int mid = (left+right)/2;
+            if(a[mid]==target)
+            {
+                return mid;
+            }
+            else if(a[mid]<target)
+            {
+                left = mid+1;
+            }
+            else if(a[mid]>target)
+            {
+                right = mid-1;
+            }
+        }
+        return left;
+    }
+
+    public static int[] plusOne(int[] a)
+    {
+        for(int i=a.length-1;i>=0;i--)
+        {
+            if(a[i]<9)
+            {
+                a[i]=a[i]+1;
+                return a;
+            }
+            else
+            {
+                a[i] = 0;
+            }
+        }
+        int[] result = new int[a.length+1];
+        result[0] = 1;
+        return result;
     }
 }
