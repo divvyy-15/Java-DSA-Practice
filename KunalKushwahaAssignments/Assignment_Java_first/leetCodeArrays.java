@@ -112,7 +112,36 @@ public class leetCodeArrays {
 // nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements
 // that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of
 // n.
+        int[] nums13 = {1,2,3,0,0,0};
+        int m = 3;
+        int[] nums14 = {2,5,6};
+        int n = 3;
+        merge(nums13,m,nums14,n);
 
+//17.You are given an array prices where prices[i] is the price of a given stock on the ith day.
+//You want to maximize your profit by choosing a single day to buy one stock and choosing a different day
+// in the future to sell that stock.
+//Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit,
+// return 0.
+        int[] prices = {7,1,5,3,6,4};
+        System.out.println("Profit is : "+maxProfit(prices));
+
+//18.Given a non-empty array of integers nums, every element appears twice except for one. Find that single
+// one. You must implement a solution with a linear runtime complexity and use only constant extra space.
+        int[] nums15 = {4,1,2,1,2};
+        System.out.println("Single number is : "+singleNum(nums15));
+
+//19.Given an array nums containing n distinct numbers in the range [0, n], return the only number in the
+// range that is missing from the array.
+
+        int[] nums16 = {9,6,4,2,3,5,7,0,1};
+        System.out.println("Missing number is(Bitwise) : "+missingNumberBitwise(nums16));
+        System.out.println("Missing number is(Gaussian) : "+missingNumberGaussian(nums16));
+
+//20.Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the
+// non-zero elements. Note that you must do this in-place without making a copy of the array.
+        int[] nums17 = {0,1,0,3,12};
+        moveZeros(nums17);
     }
 
     public static int[] runningSum(int[] a)
@@ -392,5 +421,97 @@ public class leetCodeArrays {
         int[] result = new int[a.length+1];
         result[0] = 1;
         return result;
+    }
+
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int k = m+n-1;
+        int i=m-1;
+        int j=n-1;
+        while(j>=0)
+        {
+            if(i>=0 && nums1[i]>nums2[j])
+            {
+                nums1[k] = nums1[i];
+                k--;
+                i--;
+            }
+            else
+            {
+                nums1[k] = nums2[j];
+                k--;
+                j--;
+            }
+        }
+        System.out.println(Arrays.toString(nums1));
+    }
+
+    public static int maxProfit(int[] prices)
+    {
+        if(prices.length==0)
+        {
+            return 0;
+        }
+        int maxProfit = 0;
+        int minPrice = prices[0];
+        for(int i=0;i<prices.length;i++)
+        {
+            int currProfit = prices[i] - minPrice;
+            if(currProfit>maxProfit)
+            {
+                maxProfit = currProfit;
+            }
+            if(prices[i]<minPrice)
+            {
+                minPrice = prices[i];
+            }
+        }
+        return maxProfit;
+    }
+
+    public static int singleNum(int[] nums)
+    {
+        int result = 0;
+        for(int i=0;i<nums.length;i++)
+        {
+            result = result ^ nums[i];
+        }
+        return result;
+    }
+
+    public static int missingNumberBitwise(int[] nums)
+    {
+        int n = nums.length;
+        for(int i=0;i<nums.length;i++){
+            n = n ^ nums[i] ^ i;
+        }
+        return n;
+    }
+
+    public static int missingNumberGaussian(int[] nums)
+    {
+        int n = nums.length;
+        int expSum = (n * (n+1))/2;
+        int actualSum = 0;
+        for(int i=0;i<nums.length;i++)
+        {
+            actualSum = actualSum + nums[i];
+        }
+        return expSum - actualSum;
+    }
+
+    public static void moveZeros(int[] nums)
+    {
+        int writePos = 0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]!=0)//i=1,val is 1
+            {
+                int temp = nums[i];//1
+                nums[i] = nums[writePos];
+                nums[writePos] = temp;
+                writePos++;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
     }
 }
