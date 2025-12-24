@@ -1,6 +1,7 @@
 package com.practice;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class leetCodeStrings {
     public static void main(String[] args) {
@@ -24,10 +25,20 @@ public class leetCodeStrings {
         String s2 = "leetcode";
         System.out.println("The index at which the first unique character occurs is: "+firstUniqChar(s2));
 
-//5.
+//5.Write a function to find the longest common prefix string amongst an array of strings.
+//If there is no common prefix, return an empty string "".
+        String[] strs = {"flower","flow","flight"};
+        System.out.println("Longest common prefix is: "+ longestCommonPrefixHorizontalScan(strs));
+        System.out.println("Longest common prefix is: "+ longestCommonPrefixVerticalScan(strs));
+        System.out.println("Longest common prefix is: "+ longestCommonPrefixVerticalScan2(strs));
 
-//6.
-
+//6.Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input
+// string is valid. An input string is valid if:
+//i)Open brackets must be closed by the same type of brackets.
+//ii)Open brackets must be closed in the correct order.
+//ii)Every close bracket has a corresponding open bracket of the same type.
+        String s3 = "()";
+        System.out.println("Is a valid string?: "+isValid(s3));
 //7.
 
 //8.
@@ -135,5 +146,91 @@ public class leetCodeStrings {
             }
         }
         return -1;
+    }
+
+    public static String longestCommonPrefixHorizontalScan(String[] strs)
+    {
+        String prefix = strs[0];
+        for(int i=1;i<strs.length;i++)
+        {
+            while(strs[i].indexOf(prefix)!=0)
+            {
+                prefix = prefix.substring(0,prefix.length()-1);
+            }
+        }
+        return prefix;
+    }
+
+    public static String longestCommonPrefixVerticalScan(String[] strs)
+    {
+        if(strs.length==0)
+        {
+            return "";
+        }
+        // Iterate through the characters of the first string
+        for(int i=0;i<strs[0].length();i++)
+        {
+            char c = strs[0].charAt(i); // The character we are checking
+
+            // Check this character against all other strings
+            for(int j=1;j<strs.length;j++)
+            {
+                // STOP if: we reached the end of word 'j' OR characters don't match
+                if(i==strs[j].length() || strs[j].charAt(i)!=c)
+                {
+                    // Return everything we've matched up to this point
+                    return strs[0].substring(0,i);
+                }
+            }
+        }
+        return strs[0]; // If we finish the loop, the first word is the prefix
+    }
+
+    public static String longestCommonPrefixVerticalScan2(String[] strs)
+    {
+        if(strs.length==0)
+        {
+            return "";
+        }
+        StringBuilder prefix = new StringBuilder();
+        for(int i=0;i<strs[0].length();i++)
+        {
+            char c = strs[0].charAt(i);
+            for(int j=1;j<strs.length;j++)
+            {
+                if(i>=strs[j].length() || strs[j].charAt(i)!=c)
+                {
+                    return prefix.toString();
+                }
+            }
+            prefix.append(c);
+        }
+        return prefix.toString();
+    }
+
+    public static boolean isValid(String s)
+    {
+        Stack<Character> stack = new Stack<>();
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c=='(' || c=='[' || c=='{')
+            {
+                stack.push(c);
+            }
+            else
+            {
+                if(stack.isEmpty())
+                {
+                    return false;
+                }
+                char topEle = stack.pop();
+                if((c==')'&& topEle!='(') || (c==']' && topEle!='[') || (c=='}' && topEle!='{'))
+                {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
     }
 }
