@@ -18,8 +18,8 @@ public class leetCodeStrings {
 
 //3.Given two strings s and t, return true if t is an anagram of s, and false otherwise.
         String s1 = "anagram";
-        String t = "nagaram";
-        System.out.println("Is an anagram? " + isAnagram(s1, t));
+        String t1 = "nagaram";
+        System.out.println("Is an anagram? " + isAnagram(s1, t1));
 
 //4.Given a string s, find the first non-repeating character in it and return its index. If it does not
 // exist, return -1.
@@ -52,12 +52,28 @@ public class leetCodeStrings {
         String s4 = "abcabcbb";
         System.out.println("Longest substring length: "+lengthOfLongestSubstring(s4));
 
-//9.
+//9.Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+//A subsequence of a string is a new string that is formed from the original string by deleting some
+// (can be none) of the characters without disturbing the relative positions of the remaining characters.
+// (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+        String s5 = "abc";
+        String t2 = "ahbgdc";
+        System.out.println("Is a subsequence? "+isSubSequence(s5,t2));
 
-//10.
+//10.Given a string s, reverse the order of characters in each word within a sentence while still
+// preserving whitespace and initial word order.
+        String s6 = "Let's take LeetCode contest";
+        System.out.println("Result of reversing is: "+reverseWordsUsingBuiltinFunc(s6));
+        System.out.println("Result of reversing is: "+reverseWordsWithoutBuiltinFunc(s6));
 
-//11.
-
+//11.We define the usage of capitals in a word to be right when one of the following cases holds:
+//a) All letters in this word are capitals, like "USA".
+//b) All letters in this word are not capitals, like "leetcode".
+//c) Only the first letter in this word is capital, like "Google".
+//Given a string word, return true if the usage of capitals in it is right.
+        String word = "FFFFFFFFFFFFFFFFf"; //FlaG, USA
+        System.out.println("Is the capital usage correct? "+detectCapitalUse(word));
+        
 //12.
 
 //13.
@@ -250,5 +266,79 @@ public class leetCodeStrings {
         return (maxLen==Integer.MIN_VALUE)?0:maxLen;
     }
 
+    public static boolean isSubSequence(String s,String t)
+    {
+        //an empty string is considered a subsequence of any string
+        if(s.length()==0)
+        {
+            return true;
+        }
+        int ptr = 0;
+        for(int i=0;i<t.length();i++)
+        {
+            if(ptr<s.length() && t.charAt(i) ==s.charAt(ptr))
+            {
+                ptr++;
+            }
+        }
+        return ptr==s.length();// If pt equals s.length(), it means we found every character in order
+    }
 
+    public static String reverseWordsUsingBuiltinFunc(String s)
+    {
+        String[] words = s.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<words.length;i++)
+        {
+            for(int j=words[i].length()-1;j>=0;j--)
+            {
+                sb.append(words[i].charAt(j));
+            }
+            if(i<words.length-1)
+            {
+                sb.append(" ");
+            }
+        }
+        return sb.toString();
+    }
+    public static String reverseWordsWithoutBuiltinFunc(String s)
+    {
+        char[] chars = s.toCharArray();
+        int start=0; //tracks the index for the start of a word
+        for(int i=0;i<=chars.length;i++)
+        {
+            if(i==chars.length || chars[i]==' ') //importance of order of these conditions! reversing this order would result in index out of bounds exception!
+            {
+                int left = start;
+                int right = i-1;
+                while(left<right)
+                {
+                    char temp = chars[left];
+                    chars[left] = chars[right];
+                    chars[right] = temp;
+                    left++;
+                    right--;
+                }
+                start = i+1;
+            }
+        }
+        return new String(chars);
+    }
+
+    public static boolean detectCapitalUse(String s)
+    {
+        int count = 0;
+        boolean isFirstCap = false;
+        if(s.charAt(0)>='A' && s.charAt(0)<='Z')
+        {
+            isFirstCap = true;
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)>='A' && s.charAt(i)<='Z') {
+                count++;
+            }
+        }
+        return (count==s.length()) || count==0 || (count==1 && isFirstCap);
+    }
 }
