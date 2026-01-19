@@ -1,5 +1,6 @@
 package com.practice;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -42,6 +43,32 @@ public class Mixed_topics_practice {
 
 //8.Check whether the given number is prime
         System.out.println("The given number is a prime: "+isPrime(10));
+
+//9.Find smallest number in the array
+        int[] a6 = {5, 3, 8, 1, 9, 2};
+        int[] a7 = {-5, 0, 3, -2};
+        System.out.println("Smallest number in the array is: "+smallestInTheArray(a7));
+
+//10.Check if String Contains Only Digits
+        String s4 = "12345";
+        String s5 = "123abc";
+        System.out.println("String contains only digits? "+hasOnlyDigits(s5));
+
+//11.Find indices of two numbers that add up to target
+        int[] a8 = {2,7,11,15};
+        System.out.println("The indices of the numbers adding up to the target: "+ Arrays.toString(twoSum(a8,9)));
+
+//12.Reverse digits of an integer
+        int num = -12345;
+        System.out.println("The number reversed is: "+reverseDigits(num));
+
+//13.
+
+//14.
+
+//15.
+
+//16.
     }
 
     public static void maxMinArray(int[] a)
@@ -210,5 +237,72 @@ public class Mixed_topics_practice {
             }
         }
         return true;
+    }
+
+    public static Integer smallestInTheArray(int[] a)
+    {
+        if(a==null || a.length==0)
+        {
+            return null;
+        }
+        int minEle = Integer.MAX_VALUE;
+        for(int i:a)
+        {
+            if(i<minEle)
+            {
+                minEle = i;
+            }
+        }
+        return minEle;
+    }
+
+    public static boolean hasOnlyDigits(String s)
+    {
+        if(s==null || s.isEmpty())
+        {
+            return false;
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c<'0' || c>'9')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int[] twoSum(int[] a,int target)
+    {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<a.length;i++)
+        {
+            int complement = target - a[i];
+            if(hm.containsKey(complement))
+            {
+                return new int[]{hm.get(complement),i};
+            }
+            hm.put(a[i],i);
+        }
+        return new int[]{-1,-1};
+    }
+
+    public static int reverseDigits(int n)
+    {
+        int sum = 0; //either make this long type to avoid integer overflow
+        while(n!=0)
+        {
+            int rem = n%10;
+            if(sum>Integer.MAX_VALUE/10 ||(sum==Integer.MAX_VALUE/10 && rem>7)) //check for positive overflow
+            {
+                return 0;
+            } else if (sum<Integer.MIN_VALUE/10 || (sum==Integer.MIN_VALUE/10 && rem<-8)) {
+                return 0;
+            }
+            sum = sum*10+rem;
+            n = n/10;
+        }
+        return sum; //return (int) sum;
     }
 }
