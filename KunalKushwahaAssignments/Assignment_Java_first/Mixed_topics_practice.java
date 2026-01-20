@@ -1,9 +1,6 @@
 package com.practice;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Mixed_topics_practice {
 
@@ -62,11 +59,19 @@ public class Mixed_topics_practice {
         int num = -12345;
         System.out.println("The number reversed is: "+reverseDigits(num));
 
-//13.
+//13.Find second largest element in the array
+        int[] a9 = {5, 3, 8, 1, 9, 2};
+        int[] a10 = {10, 10, 8, 7};
+        System.out.println("The second largest element in the array is: "+secLargest(a10));
 
-//14.
+//14.Character occurrence in a String
+        String s6 = "java";
+        char target = 'z';
+        System.out.println(target+ " appears in "+s6+" "+charOcc(s6,target)+ " times! ");
 
-//15.
+//15.Remove duplicates in the array
+        int[] a11 = {1, 2, 3, 2, 4, 1, 5};
+        System.out.println("After removing duplicates: "+Arrays.toString(removeDupes(a11)));
 
 //16.
     }
@@ -304,5 +309,50 @@ public class Mixed_topics_practice {
             n = n/10;
         }
         return sum; //return (int) sum;
+    }
+
+    public static int secLargest(int[] a)
+    {
+        if(a.length==1)
+            return -1;
+        int largest = Integer.MIN_VALUE;
+        int secLar = Integer.MIN_VALUE;
+        for(int i:a)
+        {
+            if(i>largest)
+            {
+                secLar = largest;
+                largest = i;
+            } else if (i>secLar && i!=largest) {
+                secLar = i;
+            }
+        }
+        return (secLar==Integer.MIN_VALUE)?-1:secLar;
+    }
+
+    public static int charOcc(String s,char t)
+    {
+        s = s.toLowerCase();
+        t = Character.toLowerCase(t);
+        int count = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)==t) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static Integer[] removeDupes(int[] a)
+    {
+        HashSet<Integer> hs = new HashSet<>();
+        for(int i:a)
+        {
+            hs.add(i);
+        }
+        Integer[] result = new Integer[hs.size()];
+        hs.toArray(result);
+        return result;
     }
 }
