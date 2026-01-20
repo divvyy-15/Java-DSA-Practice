@@ -73,7 +73,21 @@ public class Mixed_topics_practice {
         int[] a11 = {1, 2, 3, 2, 4, 1, 5};
         System.out.println("After removing duplicates: "+Arrays.toString(removeDupes(a11)));
 
-//16.
+//16.Check if the given number is an Armstrong number
+//a number that equals the sum of its own digits, each raised to the power of the total number of digits
+// in the number
+        int n1 = 153;
+        System.out.println("Given number is an Armstrong number? "+isArmstrongNumber(n1));
+
+//17.Find third largest element in the array
+
+//18.Find duplicate characters in a string
+
+//19.Find most frequent element
+
+//20.Count digits in a number
+        int n2 = 12345;
+        System.out.println("Number of digits in the given number is: "+countNumOfDigits(n2));
     }
 
     public static void maxMinArray(int[] a)
@@ -354,5 +368,34 @@ public class Mixed_topics_practice {
         Integer[] result = new Integer[hs.size()];
         hs.toArray(result);
         return result;
+    }
+
+    public static boolean isArmstrongNumber(int n)
+    {
+        String numString = String.valueOf(n);
+        int noOfDigits = numString.length();
+        int ori = n;
+        double sum = 0;
+        while(n>0)
+        {
+            int rem = n%10;
+            sum = sum + Math.pow((double)rem,(double) noOfDigits);
+            n = n/10;
+        }
+        return (int) sum == ori;
+    }
+
+    public static int countNumOfDigits(int n)
+    {
+        //Mathematical approach for counting digits:
+        //return (int) Math.log10(n) + 1;
+        //Another way-
+        int digits = 0;
+        while(n>0)
+        {
+            digits++;
+            n = n/10;
+        }
+        return digits;
     }
 }
