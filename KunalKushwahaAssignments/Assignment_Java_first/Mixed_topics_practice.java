@@ -59,7 +59,7 @@ public class Mixed_topics_practice {
         int num = -12345;
         System.out.println("The number reversed is: "+reverseDigits(num));
 
-//13.Find second largest element in the array
+//13.Find second-largest element in the array
         int[] a9 = {5, 3, 8, 1, 9, 2};
         int[] a10 = {10, 10, 8, 7};
         System.out.println("The second largest element in the array is: "+secLargest(a10));
@@ -79,15 +79,27 @@ public class Mixed_topics_practice {
         int n1 = 153;
         System.out.println("Given number is an Armstrong number? "+isArmstrongNumber(n1));
 
-//17.Find third largest element in the array
+//17.Find third-largest element in the array
+        int[] a12 = {5, 3, 8, 1, 9, 2, 7};
+        int[] a13 = {10,10,8,7,7,5};
+        int[] a14 = {5,3};
+        System.out.println("Third largest element in the array is: "+thirdLargest(a14));
 
-//18.Find duplicate characters in a string
+//18.Find duplicate characters in a string i.e. characters that appear more than once
+        String s7 = "";//"hello","programming";
+        System.out.print("Duplicate characters are: ");
+        dupeCharsInAString(s7);
 
 //19.Find most frequent element
+        int[] a15 = {5,5,5,5};//{1, 3, 2, 3, 4, 3, 5};
+        System.out.println("The most frequently occuring element in the array is: "+mostFreqEle(a15));
 
 //20.Count digits in a number
         int n2 = 12345;
         System.out.println("Number of digits in the given number is: "+countNumOfDigits(n2));
+
+//21.Remove duplicates from a sorted array
+        int[] a16 = {1, 1, 2, 2, 3, 4, 4, 5};
     }
 
     public static void maxMinArray(int[] a)
@@ -383,6 +395,76 @@ public class Mixed_topics_practice {
             n = n/10;
         }
         return (int) sum == ori;
+    }
+
+    public static int thirdLargest(int[] a)
+    {
+        if(a.length<3)
+            return -1;
+        int largest = Integer.MIN_VALUE;
+        int secLar = Integer.MIN_VALUE;
+        int thirdLar = Integer.MIN_VALUE;
+        for(int n:a)
+        {
+            if(n>largest)
+            {
+                thirdLar = secLar;
+                secLar = largest;
+                largest = n;
+            }
+            else if(n>secLar && n<largest)
+            {
+                thirdLar = secLar;
+                secLar = n;
+            }
+            else if(n>thirdLar && n<secLar)
+            {
+                thirdLar = n;
+            }
+        }
+        return (thirdLar==Integer.MIN_VALUE)?-1:thirdLar;
+    }
+
+    public static void dupeCharsInAString(String s)
+    {
+        if(s.isEmpty())
+        {
+            System.out.println("No duplicate characters found!");
+        }
+        HashMap<Character,Integer> freqMap = new HashMap<>();
+        for(int i=0;i<s.length();i++)
+        {
+            freqMap.put(s.charAt(i),freqMap.getOrDefault(s.charAt(i),0)+1);
+        }
+        for(Map.Entry<Character,Integer> e:freqMap.entrySet())
+        {
+            if(e.getValue()>1)
+            {
+                System.out.print(e.getKey()+ " ");
+            }
+        }
+    }
+
+    public static int mostFreqEle(int[] a)
+    {
+        if(a.length==0)
+            return -1;
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i:a)
+        {
+            hm.put(i,hm.getOrDefault(i,0)+1);
+        }
+        int maxFreq = 0;
+        int maxEle = a[0]; //assuming first element is the most freq one
+        for(Map.Entry<Integer,Integer> e:hm.entrySet())
+        {
+            if(e.getValue()>maxFreq)
+            {
+                maxFreq = e.getValue();
+                maxEle = e.getKey();
+            }
+        }
+        return maxEle;
     }
 
     public static int countNumOfDigits(int n)
