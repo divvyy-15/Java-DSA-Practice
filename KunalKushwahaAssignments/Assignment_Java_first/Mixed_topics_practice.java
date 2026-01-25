@@ -100,6 +100,18 @@ public class Mixed_topics_practice {
 
 //21.Remove duplicates from a sorted array
         int[] a16 = {1, 1, 2, 2, 3, 4, 4, 5};
+        System.out.println("After removing duplicates,the modified length of the array is: "+removeDupesFromArray(a16));
+
+//22.Remove duplicate words from a sentence
+        String s8 = "java is great and java is powerful";
+        String s9 = "the the the cat sat";
+        System.out.println("After removing duplicates: "+removeDupesFromSentence(s9));
+
+//23.Find word occurrence in a string
+
+
+//24.Swap Two Numbers Without Temp Variable
+
     }
 
     public static void maxMinArray(int[] a)
@@ -479,5 +491,36 @@ public class Mixed_topics_practice {
             n = n/10;
         }
         return digits;
+    }
+
+    public static int removeDupesFromArray(int[] a)
+    {
+        int writePos = 1;
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]!=a[writePos-1])
+            {
+                a[writePos] = a[i];
+                writePos++;
+            }
+        }
+        System.out.println("Array: "+Arrays.toString(a));
+        return writePos;
+    }
+
+    public static String removeDupesFromSentence(String s)
+    {
+        String[] words = s.split(" ");
+        HashSet<String> nonDupeWords = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<words.length;i++)
+        {
+            if(!nonDupeWords.contains(words[i]))
+            {
+                nonDupeWords.add(words[i]);
+                sb.append(words[i]).append(" ");
+            }
+        }
+        return sb.toString().trim();
     }
 }
