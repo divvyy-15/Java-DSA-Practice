@@ -12,12 +12,12 @@ public class Mixed_topics_practice {
 
 //2.Reverse a string
         String s1 = "Heathrow";
-        System.out.println("The reversed string is: "+ reverseStringSB(s1));
-        System.out.println("The reversed string is: "+reverseStringAlternateApproach(s1));
+        System.out.println("The reversed string is: " + reverseStringSB(s1));
+        System.out.println("The reversed string is: " + reverseStringAlternateApproach(s1));
 
 //3.Find frequency of elements
         int[] a2 = {1, 2, 2, 3, 3, 3, 4};
-        System.out.println("Frequency of all elements is: "+findFreq(a2));
+        System.out.println("Frequency of all elements is: " + findFreq(a2));
 
 //4.Fibonacci series upto n terms
         fiboSeries(7);
@@ -26,64 +26,64 @@ public class Mixed_topics_practice {
 //5.Count occurences of an element
         int[] a3 = {1, 2, 3, 2, 4, 2, 5};
         int ele = 2;
-        System.out.println("Element "+ele+" occurs "+eleOccCount(a3,ele)+ " times in the array");
+        System.out.println("Element " + ele + " occurs " + eleOccCount(a3, ele) + " times in the array");
 
 //6.Count number of words in a Sentence
         String s2 = "I have a class today";
         String s3 = "   Java    programming   ";
-        System.out.println("Total number of words in the sentence: "+wordCountInSentence(s2));
+        System.out.println("Total number of words in the sentence: " + wordCountInSentence(s2));
 
 //7.First non-repeating element
         int[] a4 = {4, 5, 1, 2, 5, 4, 1};
         int[] a5 = {1, 1, 2, 2, 3, 3};
-        System.out.println("First non-repeating element in the array: "+findFirstNonRepeatingEle(a5));
+        System.out.println("First non-repeating element in the array: " + findFirstNonRepeatingEle(a5));
 
 //8.Check whether the given number is prime
-        System.out.println("The given number is a prime: "+isPrime(10));
+        System.out.println("The given number is a prime: " + isPrime(10));
 
 //9.Find smallest number in the array
         int[] a6 = {5, 3, 8, 1, 9, 2};
         int[] a7 = {-5, 0, 3, -2};
-        System.out.println("Smallest number in the array is: "+smallestInTheArray(a7));
+        System.out.println("Smallest number in the array is: " + smallestInTheArray(a7));
 
 //10.Check if String Contains Only Digits
         String s4 = "12345";
         String s5 = "123abc";
-        System.out.println("String contains only digits? "+hasOnlyDigits(s5));
+        System.out.println("String contains only digits? " + hasOnlyDigits(s5));
 
 //11.Find indices of two numbers that add up to target
-        int[] a8 = {2,7,11,15};
-        System.out.println("The indices of the numbers adding up to the target: "+ Arrays.toString(twoSum(a8,9)));
+        int[] a8 = {2, 7, 11, 15};
+        System.out.println("The indices of the numbers adding up to the target: " + Arrays.toString(twoSum(a8, 9)));
 
 //12.Reverse digits of an integer
         int num = -12345;
-        System.out.println("The number reversed is: "+reverseDigits(num));
+        System.out.println("The number reversed is: " + reverseDigits(num));
 
 //13.Find second-largest element in the array
         int[] a9 = {5, 3, 8, 1, 9, 2};
         int[] a10 = {10, 10, 8, 7};
-        System.out.println("The second largest element in the array is: "+secLargest(a10));
+        System.out.println("The second largest element in the array is: " + secLargest(a10));
 
 //14.Character occurrence in a String
         String s6 = "java";
         char target = 'z';
-        System.out.println(target+ " appears in "+s6+" "+charOcc(s6,target)+ " times! ");
+        System.out.println(target + " appears in " + s6 + " " + charOcc(s6, target) + " times! ");
 
 //15.Remove duplicates in the array
         int[] a11 = {1, 2, 3, 2, 4, 1, 5};
-        System.out.println("After removing duplicates: "+Arrays.toString(removeDupes(a11)));
+        System.out.println("After removing duplicates: " + Arrays.toString(removeDupes(a11)));
 
 //16.Check if the given number is an Armstrong number
 //a number that equals the sum of its own digits, each raised to the power of the total number of digits
 // in the number
         int n1 = 153;
-        System.out.println("Given number is an Armstrong number? "+isArmstrongNumber(n1));
+        System.out.println("Given number is an Armstrong number? " + isArmstrongNumber(n1));
 
 //17.Find third-largest element in the array
         int[] a12 = {5, 3, 8, 1, 9, 2, 7};
-        int[] a13 = {10,10,8,7,7,5};
-        int[] a14 = {5,3};
-        System.out.println("Third largest element in the array is: "+thirdLargest(a14));
+        int[] a13 = {10, 10, 8, 7, 7, 5};
+        int[] a14 = {5, 3};
+        System.out.println("Third largest element in the array is: " + thirdLargest(a14));
 
 //18.Find duplicate characters in a string i.e. characters that appear more than once
         String s7 = "";//"hello","programming";
@@ -91,74 +91,66 @@ public class Mixed_topics_practice {
         dupeCharsInAString(s7);
 
 //19.Find most frequent element
-        int[] a15 = {5,5,5,5};//{1, 3, 2, 3, 4, 3, 5};
-        System.out.println("The most frequently occuring element in the array is: "+mostFreqEle(a15));
+        int[] a15 = {5, 5, 5, 5};//{1, 3, 2, 3, 4, 3, 5};
+        System.out.println("The most frequently occuring element in the array is: " + mostFreqEle(a15));
 
 //20.Count digits in a number
         int n2 = 12345;
-        System.out.println("Number of digits in the given number is: "+countNumOfDigits(n2));
+        System.out.println("Number of digits in the given number is: " + countNumOfDigits(n2));
 
 //21.Remove duplicates from a sorted array
         int[] a16 = {1, 1, 2, 2, 3, 4, 4, 5};
-        System.out.println("After removing duplicates,the modified length of the array is: "+removeDupesFromArray(a16));
+        System.out.println("After removing duplicates,the modified length of the array is: " + removeDupesFromArray(a16));
 
 //22.Remove duplicate words from a sentence
         String s8 = "java is great and java is powerful";
         String s9 = "the the the cat sat";
-        System.out.println("After removing duplicates: "+removeDupesFromSentence(s9));
+        System.out.println("After removing duplicates: " + removeDupesFromSentence(s9));
 
 //23.Find word occurrence in a string
-
+        String s10 = "java is great and java is fun";
+        System.out.println("Word occurrence of the stirng: " + wordOccurrenceIntheString(s10));
 
 //24.Swap Two Numbers Without Temp Variable
-
+        int a = 5,b=10;
+        swapNums(a,b);
     }
 
-    public static void maxMinArray(int[] a)
-    {
+    public static void maxMinArray(int[] a) {
         //empty array check
-        if(a.length==0)
-        {
+        if (a.length == 0) {
             return; //no value would be returned just the func will exit!
         }
         int maxEle = Integer.MIN_VALUE; //instead of setting it to 0 which would give out incorrect results if all the values in thw array are say negative,then result would become 0 which is not even present in the array!!
         int minEle = Integer.MAX_VALUE;
-        for(int num:a)
-        {
-            if(num>maxEle)
-            {
+        for (int num : a) {
+            if (num > maxEle) {
                 maxEle = num;
             }
-            if(num<minEle)
-            {
+            if (num < minEle) {
                 minEle = num;
             }
         }
-        System.out.println("Maximum element in the array: "+maxEle);
-        System.out.println("Minimum element in the array: "+minEle);
+        System.out.println("Maximum element in the array: " + maxEle);
+        System.out.println("Minimum element in the array: " + minEle);
     }
 
-    public static String reverseStringSB(String s)
-    {
-        if(s == null || s.isEmpty())
-        {
+    public static String reverseStringSB(String s) {
+        if (s == null || s.isEmpty()) {
             return "";
         }
         StringBuilder sb = new StringBuilder();
-        for(int i=s.length()-1;i>=0;i--)
-        {
+        for (int i = s.length() - 1; i >= 0; i--) {
             sb.append(s.charAt(i));
         }
         return sb.toString();
     }
 
-    public static String reverseStringAlternateApproach(String s)
-    {
+    public static String reverseStringAlternateApproach(String s) {
         char[] arr = s.toCharArray();
         int start = 0;
-        int end = s.length()-1;
-        while(start<end)
-        {
+        int end = s.length() - 1;
+        while (start < end) {
             char temp = arr[start];
             arr[start] = arr[end];
             arr[end] = temp;
@@ -168,13 +160,11 @@ public class Mixed_topics_practice {
         return new String(arr);
     }
 
-    public static HashMap<Integer, Integer> findFreq(int[] a)
-    {
-        if(a==null)
-        {
+    public static HashMap<Integer, Integer> findFreq(int[] a) {
+        if (a == null) {
             return new HashMap<>();
         }
-        HashMap<Integer,Integer> hm = new HashMap<>();
+        HashMap<Integer, Integer> hm = new HashMap<>();
         /*for(int i:a)
         {
             if(!hm.containsKey(i))
@@ -185,69 +175,58 @@ public class Mixed_topics_practice {
                 hm.put(i,hm.get(i)+1);
             }
         }*/
-        for(int i:a)
-        {
-            hm.put(i,hm.getOrDefault(i,0)+1);
+        for (int i : a) {
+            hm.put(i, hm.getOrDefault(i, 0) + 1);
         }
         return hm;
     }
 
     public static void fiboSeries(int n)   //0,1,1,2,3,5,8
     {
-        if(n<=0)
-        {
+        if (n <= 0) {
             return;
         }
         int firstTerm = 0;
-        if(n==1)
-        {
+        if (n == 1) {
             System.out.println(firstTerm);
             return;
         }
         int secTerm = 1;
-        System.out.print(firstTerm+ " , "+secTerm);
-        int i=2;
-        while(i<n)
-        {
-            int next = firstTerm+secTerm;
-            System.out.print(" , "+next);
+        System.out.print(firstTerm + " , " + secTerm);
+        int i = 2;
+        while (i < n) {
+            int next = firstTerm + secTerm;
+            System.out.print(" , " + next);
             firstTerm = secTerm;
             secTerm = next;
             i++;
         }
     }
 
-    public static int eleOccCount(int[] a,int e)
-    {
+    public static int eleOccCount(int[] a, int e) {
         //empty array check
-        if(a.length==0)
-        {
+        if (a.length == 0) {
             return 0;
         }
         int count = 0;
-        for(int i:a)
-        {
-            if(i==e)
-            {
+        for (int i : a) {
+            if (i == e) {
                 count++;
             }
         }
         return count;
     }
 
-    public static int wordCountInSentence(String s)
-    {
+    public static int wordCountInSentence(String s) {
         //I have a class today
         String[] word = s.split(" ");
         return word.length;
     }
 
-    public static int findFirstNonRepeatingEle(int[] a)
-    {
-        HashMap<Integer,Integer> freqMap = new HashMap<>();
-        for(int i:a)
-        {
-            freqMap.put(i,freqMap.getOrDefault(i,0)+1);
+    public static int findFirstNonRepeatingEle(int[] a) {
+        HashMap<Integer, Integer> freqMap = new HashMap<>();
+        for (int i : a) {
+            freqMap.put(i, freqMap.getOrDefault(i, 0) + 1);
         }
         /*for(Map.Entry<Integer, Integer> entry:freqMap.entrySet()) //to use this,use linkedHashMap to maintain order
         {
@@ -256,137 +235,111 @@ public class Mixed_topics_practice {
                 return entry.getKey();
             }
         }*/
-        for(int i:a)
-        {
-            if(freqMap.get(i)==1)
-            {
+        for (int i : a) {
+            if (freqMap.get(i) == 1) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static boolean isPrime(int num)
-    {
-        if(num<=1)
-        {
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
             return false;
         }
-        for(int i=2;i*i<=num;i++)
-        {
-            if(num%i==0)
-            {
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
                 return false;
             }
         }
         return true;
     }
 
-    public static Integer smallestInTheArray(int[] a)
-    {
-        if(a==null || a.length==0)
-        {
+    public static Integer smallestInTheArray(int[] a) {
+        if (a == null || a.length == 0) {
             return null;
         }
         int minEle = Integer.MAX_VALUE;
-        for(int i:a)
-        {
-            if(i<minEle)
-            {
+        for (int i : a) {
+            if (i < minEle) {
                 minEle = i;
             }
         }
         return minEle;
     }
 
-    public static boolean hasOnlyDigits(String s)
-    {
-        if(s==null || s.isEmpty())
-        {
+    public static boolean hasOnlyDigits(String s) {
+        if (s == null || s.isEmpty()) {
             return false;
         }
-        for(int i=0;i<s.length();i++)
-        {
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if(c<'0' || c>'9')
-            {
+            if (c < '0' || c > '9') {
                 return false;
             }
         }
         return true;
     }
 
-    public static int[] twoSum(int[] a,int target)
-    {
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        for(int i=0;i<a.length;i++)
-        {
+    public static int[] twoSum(int[] a, int target) {
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        for (int i = 0; i < a.length; i++) {
             int complement = target - a[i];
-            if(hm.containsKey(complement))
-            {
-                return new int[]{hm.get(complement),i};
+            if (hm.containsKey(complement)) {
+                return new int[]{hm.get(complement), i};
             }
-            hm.put(a[i],i);
+            hm.put(a[i], i);
         }
-        return new int[]{-1,-1};
+        return new int[]{-1, -1};
     }
 
-    public static int reverseDigits(int n)
-    {
+    public static int reverseDigits(int n) {
         int sum = 0; //either make this long type to avoid integer overflow
-        while(n!=0)
-        {
-            int rem = n%10;
-            if(sum>Integer.MAX_VALUE/10 ||(sum==Integer.MAX_VALUE/10 && rem>7)) //check for positive overflow
+        while (n != 0) {
+            int rem = n % 10;
+            if (sum > Integer.MAX_VALUE / 10 || (sum == Integer.MAX_VALUE / 10 && rem > 7)) //check for positive overflow
             {
                 return 0;
-            } else if (sum<Integer.MIN_VALUE/10 || (sum==Integer.MIN_VALUE/10 && rem<-8)) {
+            } else if (sum < Integer.MIN_VALUE / 10 || (sum == Integer.MIN_VALUE / 10 && rem < -8)) {
                 return 0;
             }
-            sum = sum*10+rem;
-            n = n/10;
+            sum = sum * 10 + rem;
+            n = n / 10;
         }
         return sum; //return (int) sum;
     }
 
-    public static int secLargest(int[] a)
-    {
-        if(a.length==1)
+    public static int secLargest(int[] a) {
+        if (a.length == 1)
             return -1;
         int largest = Integer.MIN_VALUE;
         int secLar = Integer.MIN_VALUE;
-        for(int i:a)
-        {
-            if(i>largest)
-            {
+        for (int i : a) {
+            if (i > largest) {
                 secLar = largest;
                 largest = i;
-            } else if (i>secLar && i!=largest) {
+            } else if (i > secLar && i != largest) {
                 secLar = i;
             }
         }
-        return (secLar==Integer.MIN_VALUE)?-1:secLar;
+        return (secLar == Integer.MIN_VALUE) ? -1 : secLar;
     }
 
-    public static int charOcc(String s,char t)
-    {
+    public static int charOcc(String s, char t) {
         s = s.toLowerCase();
         t = Character.toLowerCase(t);
         int count = 0;
-        for(int i=0;i<s.length();i++)
-        {
-            if(s.charAt(i)==t) {
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == t) {
                 count++;
             }
         }
         return count;
     }
 
-    public static Integer[] removeDupes(int[] a)
-    {
+    public static Integer[] removeDupes(int[] a) {
         HashSet<Integer> hs = new HashSet<>();
-        for(int i:a)
-        {
+        for (int i : a) {
             hs.add(i);
         }
         Integer[] result = new Integer[hs.size()];
@@ -394,84 +347,66 @@ public class Mixed_topics_practice {
         return result;
     }
 
-    public static boolean isArmstrongNumber(int n)
-    {
+    public static boolean isArmstrongNumber(int n) {
         String numString = String.valueOf(n);
         int noOfDigits = numString.length();
         int ori = n;
         double sum = 0;
-        while(n>0)
-        {
-            int rem = n%10;
-            sum = sum + Math.pow((double)rem,(double) noOfDigits);
-            n = n/10;
+        while (n > 0) {
+            int rem = n % 10;
+            sum = sum + Math.pow((double) rem, (double) noOfDigits);
+            n = n / 10;
         }
         return (int) sum == ori;
     }
 
-    public static int thirdLargest(int[] a)
-    {
-        if(a.length<3)
+    public static int thirdLargest(int[] a) {
+        if (a.length < 3)
             return -1;
         int largest = Integer.MIN_VALUE;
         int secLar = Integer.MIN_VALUE;
         int thirdLar = Integer.MIN_VALUE;
-        for(int n:a)
-        {
-            if(n>largest)
-            {
+        for (int n : a) {
+            if (n > largest) {
                 thirdLar = secLar;
                 secLar = largest;
                 largest = n;
-            }
-            else if(n>secLar && n<largest)
-            {
+            } else if (n > secLar && n < largest) {
                 thirdLar = secLar;
                 secLar = n;
-            }
-            else if(n>thirdLar && n<secLar)
-            {
+            } else if (n > thirdLar && n < secLar) {
                 thirdLar = n;
             }
         }
-        return (thirdLar==Integer.MIN_VALUE)?-1:thirdLar;
+        return (thirdLar == Integer.MIN_VALUE) ? -1 : thirdLar;
     }
 
-    public static void dupeCharsInAString(String s)
-    {
-        if(s.isEmpty())
-        {
+    public static void dupeCharsInAString(String s) {
+        if (s.isEmpty()) {
             System.out.println("No duplicate characters found!");
         }
-        HashMap<Character,Integer> freqMap = new HashMap<>();
-        for(int i=0;i<s.length();i++)
-        {
-            freqMap.put(s.charAt(i),freqMap.getOrDefault(s.charAt(i),0)+1);
+        HashMap<Character, Integer> freqMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            freqMap.put(s.charAt(i), freqMap.getOrDefault(s.charAt(i), 0) + 1);
         }
-        for(Map.Entry<Character,Integer> e:freqMap.entrySet())
-        {
-            if(e.getValue()>1)
-            {
-                System.out.print(e.getKey()+ " ");
+        for (Map.Entry<Character, Integer> e : freqMap.entrySet()) {
+            if (e.getValue() > 1) {
+                System.out.print(e.getKey() + " ");
             }
         }
     }
 
-    public static int mostFreqEle(int[] a)
-    {
-        if(a.length==0)
+    public static int mostFreqEle(int[] a) {
+        if (a.length == 0)
             return -1;
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        for(int i:a)
-        {
-            hm.put(i,hm.getOrDefault(i,0)+1);
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        for (int i : a) {
+            hm.put(i, hm.getOrDefault(i, 0) + 1);
         }
         int maxFreq = 0;
         int maxEle = a[0]; //assuming first element is the most freq one
-        for(Map.Entry<Integer,Integer> e:hm.entrySet())
-        {
-            if(e.getValue()>maxFreq)
-            {
+        for (Map.Entry<Integer, Integer> e : hm.entrySet()) {
+            if (e.getValue() > maxFreq) {
                 maxFreq = e.getValue();
                 maxEle = e.getKey();
             }
@@ -479,48 +414,73 @@ public class Mixed_topics_practice {
         return maxEle;
     }
 
-    public static int countNumOfDigits(int n)
-    {
+    public static int countNumOfDigits(int n) {
         //Mathematical approach for counting digits:
         //return (int) Math.log10(n) + 1;
         //Another way-
         int digits = 0;
-        while(n>0)
-        {
+        while (n > 0) {
             digits++;
-            n = n/10;
+            n = n / 10;
         }
         return digits;
     }
 
-    public static int removeDupesFromArray(int[] a)
-    {
+    public static int removeDupesFromArray(int[] a) {
         int writePos = 1;
-        for(int i=0;i<a.length;i++)
-        {
-            if(a[i]!=a[writePos-1])
-            {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != a[writePos - 1]) {
                 a[writePos] = a[i];
                 writePos++;
             }
         }
-        System.out.println("Array: "+Arrays.toString(a));
+        System.out.println("Array: " + Arrays.toString(a));
         return writePos;
     }
 
-    public static String removeDupesFromSentence(String s)
-    {
+    public static String removeDupesFromSentence(String s) {
         String[] words = s.split(" ");
         HashSet<String> nonDupeWords = new HashSet<>();
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<words.length;i++)
-        {
-            if(!nonDupeWords.contains(words[i]))
-            {
+        for (int i = 0; i < words.length; i++) {
+            if (!nonDupeWords.contains(words[i])) {
                 nonDupeWords.add(words[i]);
                 sb.append(words[i]).append(" ");
             }
         }
         return sb.toString().trim();
+    }
+
+    public static HashMap<String, Integer> wordOccurrenceIntheString(String s)
+    {
+        HashMap<String,Integer> wordOcc = new HashMap<>();
+        String[] words = s.split(" ");
+        for(String w:words)
+        {
+            wordOcc.put(w,wordOcc.getOrDefault(w,0)+1);
+            /*if(!wordOcc.containsKey(w))
+            {
+                wordOcc.put(w,1);
+            }
+            else {
+                wordOcc.put(w,wordOcc.get(w)+1);
+            }*/
+        }
+        return wordOcc;
+    }
+
+    public static void swapNums(int x,int y)
+    {
+        System.out.println("Value of first variable before swapping: "+x);
+        System.out.println("Value of second variable before swapping: "+y);
+        /*x = x+y;
+        y = x-y;
+        x = x-y;*/
+
+        x = x*y; //50 prev 5
+        y = x/y; //now 5
+        x = x/y;
+        System.out.println("Value of first variable after swapping: "+x);
+        System.out.println("Value of second variable after swapping: "+y);
     }
 }
