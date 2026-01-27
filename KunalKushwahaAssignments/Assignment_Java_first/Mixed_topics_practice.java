@@ -114,6 +114,42 @@ public class Mixed_topics_practice {
 //24.Swap Two Numbers Without Temp Variable
         int a = 5,b=10;
         swapNums(a,b);
+
+//25.Move all zeros to the end
+        int[] a17 = {0, 1, 0, 3, 12};
+        System.out.println("After moving the zeros to the end: "+Arrays.toString(moveZeroes(a17)));
+
+//26.Count vowels and consonants
+        String s11 = "Programming123";
+        countVowelsConsonants(s11);
+
+//27.Find the FIRST element that appears more than once."First" means the element whose second occurrence
+// comes earliest i.e. Find the element that appears earliest in the array and has a duplicate somewhere
+        int[] a18 = {10, 5, 3, 4, 3, 5, 6};
+        System.out.println("The first duplicate in the array is: "+firstDupeIntheArray(a18));
+
+//28.Check if the given number is a palindrome
+        int n3 = 12321;
+        System.out.println("Is the given number a palindrome: "+isPalindrome(n3));
+
+//29.Rotate array to the left by K positions
+        int[] a19 = {1, 2, 3, 4, 5};
+        int k = 2;
+        rotateLeftByK(a19,k);
+
+//30.Reverse each word individually, maintain word order
+        String s12 = "I have a class today";
+        System.out.println("After reversing each word: "+reverseEachWord(s12));
+
+//31.Print frequency of each element
+        int[] a20 = {1, 2, 2, 3, 3, 3, 4};
+        freqOfEachEleInArray(a20);
+
+//32.Find factorial of a number using iterative approach
+        System.out.println("Factorial of the number is: "+findFactorialIterative(1));
+
+//33.Find factorial of a number using recursive appraoch
+        System.out.println("Factorial of the number is: "+findFactorialRecursively(5));
     }
 
     public static void maxMinArray(int[] a) {
@@ -482,5 +518,162 @@ public class Mixed_topics_practice {
         x = x/y;
         System.out.println("Value of first variable after swapping: "+x);
         System.out.println("Value of second variable after swapping: "+y);
+    }
+
+    public static int[] moveZeroes(int[] a)
+    {
+        int writePos = 0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]!=0) {
+                a[writePos] = a[i];
+                writePos++;
+            }
+        }
+        for(int i=writePos;i<a.length;i++)
+        {
+            a[i] = 0;
+        }
+        return a;
+    }
+
+    public static void countVowelsConsonants(String s)
+    {
+        s = s.toLowerCase();
+        int vowelsCount = 0;
+        int consonantCount = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c>='a' && c<='z')
+            {
+                if(c=='a' || c=='e' || c=='i' || c=='o' || c=='u')
+                {
+                    vowelsCount++;
+                }
+                else
+                {
+                    consonantCount++;
+                }
+            }
+        }
+        System.out.println("Vowels: "+vowelsCount);
+        System.out.println("Consonants: "+consonantCount);
+    }
+
+    public static int firstDupeIntheArray(int[] a)
+    {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<a.length;i++)
+        {
+            hm.put(a[i],hm.getOrDefault(a[i],0)+1);
+        }
+        for(int j=0;j<a.length;j++)
+        {
+            if(hm.containsKey(a[j]) && hm.get(a[j])>1)
+            {
+                return a[j];
+            }
+        }
+        return -1;
+    }
+
+    public static String isPalindrome(int n)
+    {
+        int temp = n;
+        int sum = 0;
+        while(n>0)
+        {
+            int rem = n%10;
+            sum = sum*10 + rem;
+            n = n/10;
+        }
+        if(sum==temp)
+        {
+            return "Yes!";
+        }
+        else {
+            return "No!";
+        }
+    }
+
+    public static void reverseArray(int[] arr,int start,int end)
+    {
+        while(start<end)
+        {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void rotateLeftByK(int[] a,int k)
+    {
+        //Reversal algorithm
+        k = k % a.length;
+        reverseArray(a,0,k-1); //reverse first two elements
+        reverseArray(a,k,a.length-1); //reverse remaining elements
+        reverseArray(a,0,a.length-1); //reverse the entire array
+        System.out.println("After rotation: "+Arrays.toString(a));
+    }
+
+    public static String reverseEachWord(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        String[] words = s.split(" ");
+        for(String w:words)
+        {
+            for(int i=w.length()-1;i>=0;i--)
+            {
+                char c = w.charAt(i);
+                sb.append(c);
+            }
+            sb.append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+    public static void freqOfEachEleInArray(int[] a)
+    {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<a.length;i++)
+        {
+            hm.put(a[i],hm.getOrDefault(a[i],0)+1);
+        }
+        for(Map.Entry<Integer,Integer> e :hm.entrySet())
+        {
+            System.out.println(e.getKey()+" appears "+e.getValue()+ (e.getValue()==1? " time" : " times"));
+        }
+        //To print in sorted order of keys
+        /*List<Integer> sortedKeys = new ArrayList<>(hm.keySet());
+        Collections.sort(sortedKeys);
+        for(Integer ele:sortedKeys)
+        {
+            System.out.println(ele +" appears "+hm.get(ele) + (hm.get(ele)==1? " time": " times"));
+        }*/
+    }
+
+    public static int findFactorialIterative(int num)
+    {
+        int i = 1;
+        int fact = 1;
+        while(i<=num)
+        {
+            fact = fact*i;
+            i++;
+        }
+        return fact;
+    }
+
+    public static int findFactorialRecursively(int num)
+    {
+        if(num==0 || num==1)
+            return 1;
+        else
+        {
+            return num * findFactorialRecursively(num-1);
+        }
     }
 }
