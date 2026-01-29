@@ -148,8 +148,31 @@ public class Mixed_topics_practice {
 //32.Find factorial of a number using iterative approach
         System.out.println("Factorial of the number is: "+findFactorialIterative(1));
 
-//33.Find factorial of a number using recursive appraoch
+//33.Find factorial of a number using recursive approach
         System.out.println("Factorial of the number is: "+findFactorialRecursively(5));
+
+//34.Find the missing number from 1 to N in an unsorted array
+        int[] a21 = {1, 2, 4, 5, 6};
+        System.out.println("Missing number in the series is: "+findMissingNum(a21,6));
+
+//35.Compress string by showing character + count
+//If compressed string is NOT shorter than original, return original
+        String s13 = "aabcccccaaa";
+        System.out.println("After compression: "+compressString(s13));
+
+//36.Merge two sorted arrays into one sorted array. Both input arrays are already sorted
+        int[] a22 = {1, 5, 9};
+        int[] a23 = {2, 3, 10, 11};
+        System.out.println("After merging: "+Arrays.toString(mergeTwoSortedArrays(a22,a23)));
+
+//37.Remove all special characters, keep only letters and digits
+        String s14 = "Hello@World!123"; //Java#Programming$2024
+        System.out.println("After removing special characters: "+removeSplChars(s14));
+
+//38.Find intersection of two arrays (common elements). Result should contain unique elements only
+
+//39.Find GCD of two numbers using Euclidean Algorithm
+
     }
 
     public static void maxMinArray(int[] a) {
@@ -675,5 +698,88 @@ public class Mixed_topics_practice {
         {
             return num * findFactorialRecursively(num-1);
         }
+    }
+
+    public static int findMissingNum(int[] a,int n)
+    {
+        int expSum = (n * (n+1))/2;
+        int actualSum = 0;
+        for(int i:a)
+        {
+            actualSum = actualSum+i;
+        }
+        return expSum - actualSum;
+    }
+
+    public static String compressString(String s)
+    {
+        StringBuilder result = new StringBuilder();
+        int charCount = 1;
+        for(int i=1;i<s.length();i++)
+        {
+            if(s.charAt(i)==s.charAt(i-1))
+            {
+                charCount++;
+            }
+            else
+            {
+                result.append(s.charAt(i-1)).append(charCount);
+                charCount = 1;  //reset count for new char streak
+            }
+        }
+        //for the last character
+        result.append(s.charAt(s.length()-1)).append(charCount);
+
+        //length check: return the compressed string only if it is lesser than the original
+        return result.length()<s.length()?result.toString():s;
+    }
+
+    public static int[] mergeTwoSortedArrays(int[] a,int[] b)
+    {
+        int[] merged = new int[a.length+b.length];
+        int pos=0;
+        int aPos=0;
+        int bPos=0;
+        while(aPos<a.length && bPos<b.length)
+        {
+            if(a[aPos]<b[bPos])
+            {
+                merged[pos] = a[aPos];
+                pos++;
+                aPos++;
+            }
+            else {
+                merged[pos] = b[bPos];
+                pos++;
+                bPos++;
+            }
+        }
+        while(bPos<b.length)
+        {
+            merged[pos]=b[bPos];
+            pos++;
+            bPos++;
+        }
+        while(aPos<a.length)
+        {
+            merged[pos]=a[aPos];
+            pos++;
+            aPos++;
+        }
+        return merged;
+    }
+
+    public static String removeSplChars(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if((c>='a' && c<='z') || (c>='A' && c<='Z') || (c>='0' && c<='9'))
+            {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
