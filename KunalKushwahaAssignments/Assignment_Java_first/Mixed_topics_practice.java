@@ -170,9 +170,13 @@ public class Mixed_topics_practice {
         System.out.println("After removing special characters: "+removeSplChars(s14));
 
 //38.Find intersection of two arrays (common elements). Result should contain unique elements only
+        int[] a24 = {1, 2, 2, 1};
+        int[] a25 = {2, 2};
+        System.out.println("Common elements in the arrays are: "+Arrays.toString(findIntersectionOfArrays(a24,a25)));
 
-//39.Find GCD of two numbers using Euclidean Algorithm
-
+//39.Find GCD of two numbers using Euclidean Algorithm [iteratively and recursively]
+        System.out.println("The Greatest common divisor for the given two numbers is: "+findGCDIter(48,18));
+        System.out.println("The Greatest common divisor for the given two numbers is: "+findGCDRecur(100,50));
     }
 
     public static void maxMinArray(int[] a) {
@@ -781,5 +785,52 @@ public class Mixed_topics_practice {
             }
         }
         return sb.toString();
+    }
+
+    public static int[] findIntersectionOfArrays(int[] a, int[] b)
+    {
+        HashSet<Integer> interim = new HashSet<>();
+        HashSet<Integer> result = new HashSet<>();
+        for(int i=0;i<a.length;i++)
+        {
+            interim.add(a[i]);
+        }
+        for(int j=0;j<b.length;j++)
+        {
+            if(interim.contains(b[j]))
+            {
+                result.add(b[j]);
+            }
+        }
+        //creating resultant int[] from hashset
+        int[] resultant = new int[result.size()];
+        int k = 0;
+        for(int num:result)
+        {
+            resultant[k] = num;
+            k++;
+        }
+        return resultant;
+    }
+
+    public static int findGCDIter(int a, int b)
+    {
+        while(b!=0)
+        {
+            int temp = b;
+            b = a%b;
+            a = temp;
+        }
+        return a;
+    }
+
+    public static int findGCDRecur(int a,int b)
+    {
+        if(b==0)
+            return a;
+        else
+        {
+            return findGCDRecur(b,a%b);
+        }
     }
 }
