@@ -177,6 +177,43 @@ public class Mixed_topics_practice {
 //39.Find GCD of two numbers using Euclidean Algorithm [iteratively and recursively]
         System.out.println("The Greatest common divisor for the given two numbers is: "+findGCDIter(48,18));
         System.out.println("The Greatest common divisor for the given two numbers is: "+findGCDRecur(100,50));
+
+//40.Check if array is sorted in ascending order
+        int[] a26 = {1, 2, 3, 4, 5};
+        System.out.println("The given array is sorted in ascending order: "+isArrayAscSorted(a26));
+
+//41.Count words handling multiple/leading/trailing spaces
+        String s15 = "  Java   Programming  "; //"Hello World"
+        System.out.println("Total number of words in the string is: "+countWordsInString(s15));
+
+//42.Calculate LCM using GCD
+        System.out.println("Least common multiple of the two given numbers is: "+findLCM(12,18));
+
+//43.Find ALL pairs in array whose sum equals target. Print all pairs, not just first one
+        int[] a27 = {2, 4, 3, 6, 8};//{1, 5, 7, -1, 5};
+        int target1 = 7; //6;
+        findAllPairsWithSum(a27,target1);
+
+//44.Check if second string is a rotation of first string
+        String s16 = "waterbottle";
+        String s17 = "erbottlewat";
+        System.out.println("Second string is a rotation of first string: "+isStringRotation(s16,s17));
+
+//45.Sort a HashMap by its values in ascending order
+        HashMap<Character,Integer> m1 = new HashMap<>();
+        m1.put('a',5);
+        m1.put('b',2);
+        m1.put('c',8);
+        m1.put('d',1);
+        sortMapinAsc(m1);
+
+//46.
+
+//47.
+
+//48.
+
+//49.
     }
 
     public static void maxMinArray(int[] a) {
@@ -831,6 +868,82 @@ public class Mixed_topics_practice {
         else
         {
             return findGCDRecur(b,a%b);
+        }
+    }
+
+    public static boolean isArrayAscSorted(int[] a)
+    {
+        for(int i=1;i<a.length;i++)
+        {
+            if(a[i]<a[i-1])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int countWordsInString(String s)
+    {
+        boolean isWord = false;
+        int count = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c!=' ')
+            {
+                if(!isWord) // ONLY increment if we weren't already inside a word
+                {
+                    isWord = true; // Now we are "in" a word
+                    count++;
+                }
+            }
+            else {
+                isWord = false; // We hit a space, so the current word is over
+            }
+        }
+        return count;
+    }
+
+    public static int findLCM(int a,int b)
+    {
+        int gcd = findGCDRecur(a,b);
+        return (a/gcd)*b;
+    }
+
+    public static void findAllPairsWithSum(int[] a,int t)
+    {
+        HashSet<Integer> set = new HashSet<>();
+        for (int j : a) {
+            int complement = t - j;
+            if (set.contains(complement)) {
+                System.out.println("(" + j + "," + complement + ")");
+            }
+            set.add(j);
+        }
+    }
+
+    public static boolean isStringRotation(String a,String b)
+    {
+        if(a.length()==b.length())
+        {
+            return (a+a).contains(b);
+        }
+        return false;
+    }
+
+    /*public static boolean isStringRotationManual(String a,String b)
+    {
+
+    }*/
+
+    public static void sortMapinAsc(HashMap<Character,Integer> m)
+    {
+        List<Map.Entry<Character,Integer>> entries = new ArrayList<>(m.entrySet());
+        entries.sort((e1,e2) -> e1.getValue().compareTo(e2.getValue()));
+        for(Map.Entry<Character,Integer> e:entries)
+        {
+            System.out.println(e.getKey() + " = "+ e.getValue());
         }
     }
 }
