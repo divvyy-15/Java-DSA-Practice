@@ -205,15 +205,29 @@ public class Mixed_topics_practice {
         m1.put('b',2);
         m1.put('c',8);
         m1.put('d',1);
-        sortMapinAsc(m1);
+        sortMapinAscByValues(m1);
 
-//46.
+//46.Array has N+1 numbers in range [1, N]. One number is duplicated, find it.
+        int[] a28 = {1, 3, 4, 2, 2};
+        System.out.println("The duplicate in the array is: "+findDuplicateInArray(a28));
+        System.out.println("The duplicate in the array is: "+findDuplicateInArrayMath(a28));
 
-//47.
+//47.String decompression - Expand each character by its count
+//Note: This assumes single-digit counts only
+        String s18 = "a3b2c1";
+        System.out.println("Decompressed string: "+decompressString(s18));
 
-//48.
+//48.Sort HashMap by keys alphabetically
+        HashMap<String,Integer> hm = new HashMap<>();
+        hm.put("cherry",2);
+        hm.put("apple",3);
+        hm.put("banana",1);
+        System.out.println("After sorting: "+sortMapbyKeys(hm));
 
-//49.
+//49.Check Armstrong number for N digits [generalization]
+        int num1 = 1634;
+        System.out.println("Is the given number Armstrong: "+isArmstrongGen(num1));
+
     }
 
     public static void maxMinArray(int[] a) {
@@ -937,7 +951,7 @@ public class Mixed_topics_practice {
 
     }*/
 
-    public static void sortMapinAsc(HashMap<Character,Integer> m)
+    public static void sortMapinAscByValues(HashMap<Character,Integer> m)
     {
         List<Map.Entry<Character,Integer>> entries = new ArrayList<>(m.entrySet());
         entries.sort((e1,e2) -> e1.getValue().compareTo(e2.getValue()));
@@ -945,5 +959,70 @@ public class Mixed_topics_practice {
         {
             System.out.println(e.getKey() + " = "+ e.getValue());
         }
+    }
+
+    public static int findDuplicateInArray(int[] a)
+    {
+        HashSet<Integer> s = new HashSet<>();
+        for(int n:a)
+        {
+            if(s.contains(n))
+            {
+               return n;
+            }
+            s.add(n);
+        }
+        return -1;
+    }
+
+    public static int findDuplicateInArrayMath(int[] a)
+    {
+        int sum = 0;
+        int nums = a.length - 1;
+        for(int n:a)
+        {
+            sum = sum+n;
+        }
+        int expSum = (nums*(nums+1))/2;
+        return sum - expSum;
+    }
+
+    public static String decompressString(String s)
+    {
+        if(s.length()%2 != 0)
+            return "Invalid Input";
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i+=2)
+        {
+            char c = s.charAt(i);
+            int digit = s.charAt(i+1) - '0';
+            while(digit!=0)
+            {
+                sb.append(c);
+                digit--;
+            }
+        }
+        return sb.toString();
+    }
+
+    public static TreeMap<String, Integer> sortMapbyKeys(HashMap<String,Integer> h)
+    {
+        TreeMap<String,Integer> sorted = new TreeMap<>(h);
+        return sorted;
+    }
+
+    public static boolean isArmstrongGen(int n)
+    {
+        int pow = String.valueOf(n).length();
+        int temp = n;
+        double sum = 0;
+
+        while(n>0)
+        {
+            int rem = n%10;
+            sum = sum + (int)Math.pow(rem,pow);
+            n = n/10;
+        }
+        return temp == sum;
     }
 }
