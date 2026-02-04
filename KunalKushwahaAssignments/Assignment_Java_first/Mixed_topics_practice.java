@@ -228,6 +228,22 @@ public class Mixed_topics_practice {
         int num1 = 1634;
         System.out.println("Is the given number Armstrong: "+isArmstrongGen(num1));
 
+//50.Find leaders in the array. Element is a LEADER if it is greater than ALL elements to its RIGHT
+//Note: Last element is ALWAYS a leader!        
+        int[] a29 = {16, 17, 4, 3, 5, 2};
+        System.out.println("Leaders in the array are: "+leadersInArray(a29));
+
+//51.Split string into 3 categories and find count of letters,numbers,special characters
+        String s19 = "priyanka123@#";
+        categoriseString(s19);
+
+//52.Remove duplicates WITHOUT using HashSet
+        int[] a30 = {1, 2, 3, 2, 4, 1, 5};
+        System.out.println("After removing duplicates: "+removeDuplicatesWithoutSet(a30));
+
+//54.Write recursive Function for Fibonacci series upto given terms
+        int num2 = 10;
+        //fibonacciRecursive(num2);
     }
 
     public static void maxMinArray(int[] a) {
@@ -1024,5 +1040,64 @@ public class Mixed_topics_practice {
             n = n/10;
         }
         return temp == sum;
+    }
+    
+    public static List<Integer> leadersInArray(int[] a)
+    {
+        if(a ==null || a.length==0)
+            return new ArrayList<>(); //return empty list
+        List<Integer> result = new ArrayList<>();
+        int maxFromRight = a.length - 1;
+        for(int i=a.length-2;i>=0;i--)
+        {
+            if(a[i]>maxFromRight)
+            {
+                maxFromRight = a[i];
+                result.add(a[i]);
+            }
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+    public static void categoriseString(String s)
+    {
+        StringBuilder letters = new StringBuilder();
+        StringBuilder splChars = new StringBuilder();
+        StringBuilder nums = new StringBuilder();
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c>='0' && c<='9')
+            {
+                nums.append(c);
+            }
+            else if(c>='a' && c<='z' || c>='A' && c<='Z')
+            {
+                letters.append(c);
+            }
+            else
+            {
+                splChars.append(c);
+            }
+        }
+        System.out.println("Letters: "+letters);
+        System.out.println("Numbers: "+nums);
+        System.out.println("Special: "+splChars);
+    }
+
+    public static List<Integer> removeDuplicatesWithoutSet(int[] a)
+    {
+        Arrays.sort(a);
+        List<Integer> nonDupes = new ArrayList<>();
+        nonDupes.add(a[0]);
+        for(int i=1;i<a.length;i++)
+        {
+            if(a[i]!=a[i-1])
+            {
+                nonDupes.add(a[i]);
+            }
+        }
+        return nonDupes;
     }
 }
