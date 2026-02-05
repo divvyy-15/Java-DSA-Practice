@@ -241,9 +241,27 @@ public class Mixed_topics_practice {
         int[] a30 = {1, 2, 3, 2, 4, 1, 5};
         System.out.println("After removing duplicates: "+removeDuplicatesWithoutSet(a30));
 
-//54.Write recursive Function for Fibonacci series upto given terms
+//53.Write recursive Function for Fibonacci series upto given terms
         int num2 = 10;
         //fibonacciRecursive(num2);
+
+//54.Rearrange array so all odd numbers come first, then all even numbers.
+//Maintain relative order within odd and even groups
+        int[] a31 = {1, 2, 7, 8, 4, 10, 5, 3};
+        System.out.println("After rearranging: "+Arrays.toString(oddFirstEvenLast(a31)));
+
+//55.Count words MANUALLY without using split()
+        String s20 = " Java  Programming ";  //"Good morning friends";
+        System.out.println("Total number of words: "+countWordsInStringManually(s20));
+
+//56.Find all words that appear more than once
+        String s21 = "java is great and java is fun";
+        System.out.println("Words appearing more than once: "+wordOccurringMoreThanOnceInString(s21));
+
+//57.Sort array using Bubble Sort algorithm
+        int[] a32 = {5, 3, 8, 1, 2};
+        System.out.println("Sorted array: "+Arrays.toString(bubbleSort(a32)));
+
     }
 
     public static void maxMinArray(int[] a) {
@@ -915,24 +933,10 @@ public class Mixed_topics_practice {
 
     public static int countWordsInString(String s)
     {
-        boolean isWord = false;
-        int count = 0;
-        for(int i=0;i<s.length();i++)
-        {
-            char c = s.charAt(i);
-            if(c!=' ')
-            {
-                if(!isWord) // ONLY increment if we weren't already inside a word
-                {
-                    isWord = true; // Now we are "in" a word
-                    count++;
-                }
-            }
-            else {
-                isWord = false; // We hit a space, so the current word is over
-            }
-        }
-        return count;
+        if(s==null || s.trim().isEmpty())
+            return 0;
+        String[] words = s.trim().split("\\s+");
+        return words.length;
     }
 
     public static int findLCM(int a,int b)
@@ -1099,5 +1103,90 @@ public class Mixed_topics_practice {
             }
         }
         return nonDupes;
+    }
+
+    public static int[] oddFirstEvenLast(int[] a)
+    {
+        //{1, 2, 7, 8, 4, 10, 5, 3} --> [1, 7, 5, 3, 2, 8, 4, 10]
+        List<Integer> oddGroup = new ArrayList<>();
+        List<Integer> evenGroup = new ArrayList<>();
+
+        for(int num:a)
+        {
+            if(num%2==0)
+            {
+                evenGroup.add(num);
+            }
+            else {
+                oddGroup.add(num);
+            }
+        }
+        oddGroup.addAll(evenGroup);
+        //return oddGroup;   --if asked to return an array of int
+        int[] result = new int[oddGroup.size()];
+        for(int i=0;i< oddGroup.size();i++)
+        {
+            result[i] = oddGroup.get(i);
+        }
+        return result;
+    }
+
+    public static int countWordsInStringManually(String s)
+    {
+        boolean isWord = false;
+        int count = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c!=' ')
+            {
+                if(!isWord)
+                {
+                    isWord = true;
+                    count++;
+                }
+            }
+            else {
+                isWord = false;
+            }
+        }
+        return count;
+    }
+
+    public static List<String> wordOccurringMoreThanOnceInString(String s)
+    {
+        if(s==null || s.trim().isEmpty())
+            return new ArrayList<>();
+        HashMap<String,Integer> countFreq = new HashMap<>();
+        List<String> duplicateWords = new ArrayList<>();
+        for(String word:s.trim().split("\\s+"))
+        {
+            countFreq.put(word,countFreq.getOrDefault(word,0)+1);
+        }
+        for(Map.Entry<String,Integer> m:countFreq.entrySet())
+        {
+            if(m.getValue()>1)
+            {
+                duplicateWords.add(m.getKey());
+            }
+        }
+        return duplicateWords;
+    }
+
+    public static int[] bubbleSort(int[] a)
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=0;j<a.length-i-1;j++)
+            {
+                if(a[j]>a[j+1])
+                {
+                    int temp = a[j+1];
+                    a[j+1] = a[j];
+                    a[j] = temp;
+                }
+            }
+        }
+        return a;
     }
 }
