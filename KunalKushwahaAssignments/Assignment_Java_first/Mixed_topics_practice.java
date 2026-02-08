@@ -262,6 +262,44 @@ public class Mixed_topics_practice {
         int[] a32 = {5, 3, 8, 1, 2};
         System.out.println("Sorted array: "+Arrays.toString(bubbleSort(a32)));
 
+//58.Check if two arrays are exactly equal
+        int[] a33 = {1,2,3};
+        int[] a34 = {1,2,3};
+        System.out.println("Are both the Arrays equal? "+checkArraysEquality(a33,a34));
+
+//59.Extract all numbers from string and sum them. Numbers can be multi-digit!
+        String s22 = "abc123def45";
+        System.out.println("The sum of numbers in String is: "+extractAndSumNumsInString(s22));
+
+//60.Sort string array alphabetically using Bubble Sort
+        String[] a35 = {"banana", "apple", "cherry", "date"};
+        System.out.println("After alphabetic sorting: "+Arrays.toString(bubbleSortOnStringArray(a35)));
+
+//61.Task: Print this pattern:
+//
+//*
+//**
+//***
+//****
+//****
+//***
+//**
+//*
+//
+//Input: n = 4 (max stars per row)
+
+//62.Simply merge two arrays into one. NOT sorted merge - just concatenate.
+        int[] a36 = {1,2,3};
+        int[] a37 = {4,5,6};
+        System.out.println("After merging: "+Arrays.toString(mergeTwoUnsortedArrays(a36,a37)));
+
+//63.Find ALL missing numbers in range. Range is from min to max of array
+        int[] a38 = {1, 2, 4, 5, 7};
+        System.out.println("Missing numbers in the range are: "+findMissingNumFromArray(a38));
+
+//64.Print characters at even indices
+        String s23 = "automation";
+        System.out.println("Even indexed characters in the string are: "+printEvenIndexedStringChar(s23));
     }
 
     public static void maxMinArray(int[] a) {
@@ -1188,5 +1226,117 @@ public class Mixed_topics_practice {
             }
         }
         return a;
+    }
+
+    public static boolean checkArraysEquality(int[] a,int[] b)
+    {
+        if(a.length != b.length)
+        {
+            return false;
+        }
+        else {
+            for(int i=0;i<a.length;i++)
+            {
+                if(a[i]!=b[i])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static int extractAndSumNumsInString(String s)
+    {
+        int sum = 0;
+        int currentNum = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c>='0' && c<='9')
+            {
+                currentNum = currentNum*10 + (c - '0');
+            }
+            else {
+                sum = sum + currentNum;
+                currentNum = 0;
+            }
+        }
+        sum = sum + currentNum;
+        return sum;
+    }
+
+    public static String[] bubbleSortOnStringArray(String[] a)
+    {
+        for(int i=0;i<a.length;i++)
+        {
+            for(int j=0;j<a.length-1-i;j++)
+            {
+                if(a[j].compareTo(a[j+1])>0)
+                {
+                    String temp = a[j];
+                    a[j] = a[j+1];
+                    a[j+1] = temp;
+                }
+            }
+        }
+        return a;
+    }
+
+    public static int[] mergeTwoUnsortedArrays(int[] a,int[] b)
+    {
+        int[] result = new int[a.length+b.length];
+        int writePos = 0;
+        for(int num:a)
+        {
+            result[writePos] = num;
+            writePos++;
+        }
+        for(int num:b)
+        {
+            result[writePos] = num;
+            writePos++;
+        }
+        return result;
+    }
+
+    public static String printEvenIndexedStringChar(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        /*for(int i=0;i<s.length();i++)
+        {
+            if(i%2==0)
+            {
+                sb.append(s.charAt(i));
+            }
+        }*/
+        //or take even leap steps:
+        for(int i=0;i<s.length();i+=2)
+        {
+            sb.append(s.charAt(i));
+        }
+        return sb.toString();
+    }
+
+    public static List<Integer> findMissingNumFromArray(int[] a)
+    {
+        int maxNum = Integer.MIN_VALUE;
+        int minNum = Integer.MAX_VALUE;
+        List<Integer> result = new ArrayList<>();
+        HashSet<Integer> allNums = new HashSet<>();
+        for(int num:a)
+        {
+            allNums.add(num);
+            if(num>maxNum) maxNum = num;
+            if(num<minNum) minNum = num;
+        }
+        for(int i=minNum;i<=maxNum;i++)
+        {
+            if(!allNums.contains(i))
+            {
+                result.add(i);
+            }
+        }
+        return result;
     }
 }
