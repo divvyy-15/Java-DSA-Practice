@@ -300,6 +300,38 @@ public class Mixed_topics_practice {
 //64.Print characters at even indices
         String s23 = "automation";
         System.out.println("Even indexed characters in the string are: "+printEvenIndexedStringChar(s23));
+
+//65.Reverse words in a sentence
+        String s24 = "I have a class today";
+        System.out.println("After reversing: "+reverseWordsInSentence(s24));
+
+//66.Remove duplicate characters, keep first occurence
+        String s25 = "programming";
+        System.out.println("After removing duplicates: "+removeDuplicateChars(s25));
+
+//67.Manually replace all occurrences of a specific character with another one
+        String s26 = "hello";
+        System.out.println("After replacement: "+replaceChars(s26,'l','x'));
+
+//68.Separate lowercase, uppercase, digits. Sort each group, concatenate
+        String s27 = "aBcA1bC2";
+        System.out.println("After sorting: "+sortStringByGroups(s27));
+
+//69.Calculate count of numbers in the string
+        String s28 = "12abc34xyz5";
+        System.out.println("Total number in the string: "+countNumericBlocks(s28));
+
+//70.String decompression - Parse multi-digit numbers
+        String s29 = "a12b3";
+        System.out.println("After decompression: "+decompressStringForMultiDigitNums(s29));
+
+//71.Find the longest common prefix
+        String[] a39 = {"flower", "flow", "flight"};
+        System.out.println("Longest common prefix is: "+longestCommonPrefix(a39));
+
+//72.
+
+//73.
     }
 
     public static void maxMinArray(int[] a) {
@@ -1338,5 +1370,156 @@ public class Mixed_topics_practice {
             }
         }
         return result;
+    }
+
+    public static String reverseWordsInSentence(String s)
+    {
+        if(s.isEmpty())
+            return "";
+        StringBuilder sb = new StringBuilder();
+        String[] words = s.split("\\s+");
+        for(int i=words.length-1;i>=0;i--)
+        {
+            sb.append(words[i]).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+    public static String removeDuplicateChars(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        char[] alphas = s.toCharArray();
+        int[] freqCount = new int[26];
+        for(int i=0;i<alphas.length;i++)
+        {
+            char c = alphas[i];
+            int ind = c - 'a';
+            if(freqCount[ind]==0)
+            {
+                sb.append(c);
+                freqCount[ind]++;
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String replaceChars(String s,char oldChar,char newChar)
+    {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)!=oldChar)
+            {
+                sb.append(s.charAt(i));
+            }
+            else {
+                sb.append(newChar);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String sortStringByGroups(String s)
+    {
+        List<Character> lowerCase = new ArrayList<>();
+        List<Character> upperCase = new ArrayList<>();
+        List<Character> digits = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(c>='a' && c<='z')
+            {
+                lowerCase.add(c);
+            }
+            else if(c>='A' && c<='Z')
+            {
+                upperCase.add(c);
+            }
+            else if(c>='0' && c<='9')
+            {
+                digits.add(c);
+            }
+        }
+        Collections.sort(lowerCase);
+        Collections.sort(upperCase);
+        Collections.sort(digits);
+        //concatenate: lower+upper+digits
+        for(Character c:lowerCase)
+        {
+            sb.append(c);
+        }
+        for(Character c:upperCase)
+        {
+            sb.append(c);
+        }
+        for(Character c:digits)
+        {
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    public static int countNumericBlocks(String s)
+    {
+        boolean inNum = false;
+        int count = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)>='0' && s.charAt(i)<='9')
+            {
+                if(!inNum)
+                {
+                    inNum = true;
+                    count++;
+                }
+            }
+            else {
+                inNum = false;
+            }
+        }
+        return count;
+    }
+
+    public static String decompressStringForMultiDigitNums(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++)
+        {
+            char lastChar = s.charAt(i);
+            if(lastChar>='a' && lastChar<='z')
+            {
+                StringBuilder numStr = new StringBuilder();
+                while(i+1<s.length() && Character.isDigit(s.charAt(i+1)))
+                {
+                    numStr.append(s.charAt(i+1));
+                    i++;
+                }
+                int digit = Integer.parseInt(numStr.toString());
+                for(int j=0;j<digit;j++)
+                {
+                    sb.append(lastChar);
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String longestCommonPrefix(String[] a)
+    {
+        String ref = a[0];
+        for(int i=0;i<ref.length();i++)
+        {
+            char c = ref.charAt(i);
+            for(int j=1;j<a.length;j++)
+            {
+                // If the word is too short OR the character doesn't match...
+                if(a[j].length()==i || a[j].charAt(i)!=c)
+                {
+                    return ref.substring(0,i);
+                }
+            }
+        }
+        return ref;
     }
 }
