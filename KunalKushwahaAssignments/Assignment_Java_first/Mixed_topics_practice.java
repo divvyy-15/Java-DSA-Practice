@@ -329,9 +329,35 @@ public class Mixed_topics_practice {
         String[] a39 = {"flower", "flow", "flight"};
         System.out.println("Longest common prefix is: "+longestCommonPrefix(a39));
 
-//72.
+//72.Reverse specific words in a sentence
+        String s30 = "I have a class today";
+        System.out.println("After reversing specific words: "+reverseSpecificWords(s30,3));
 
-//73.
+//73.Reverse first & last word in the string
+        String s31 = "writing java code";
+        System.out.println("First and last word reversed: "+reverseFirstAndLastWords(s31));
+
+//74.Given an array, a first index, and a second index, swap the values sitting at those two positions.
+        int[] a40 = {10, 20, 30, 40, 50};
+        swapArrayElements(a40,1,4);
+
+//75.Switch the values of two string variables without creating a third variable
+        String s32 = "Hello";
+        String s33 = "World";
+        swapTwoString(s32,s33);
+
+//76.The full reflection: Take a string of words and append the same words in reverse order to the end
+        String s34 = "welcome world";
+        System.out.println("After reflection: "+printFullReflectedString(s34));
+
+//77.The last word echo: Take a string of words and repeat the very last word one extra time
+        System.out.println("Last word echoed: "+printLastWordEchoed(s34));
+
+//78.
+
+//79.
+
+//80.
     }
 
     public static void maxMinArray(int[] a) {
@@ -1521,5 +1547,110 @@ public class Mixed_topics_practice {
             }
         }
         return ref;
+    }
+
+    public static String reverseStr(String s)
+    {
+        StringBuilder reversed = new StringBuilder();
+        for(int i=s.length()-1;i>=0;i--)
+        {
+            char c = s.charAt(i);
+            reversed.append(c);
+        }
+        return reversed.toString();
+    }
+
+    public static String reverseSpecificWords(String s,int index)
+    {
+        String[] words = s.split("\\s+");
+        String rev = reverseStr(words[index]);
+        words[index] = rev;
+        StringBuilder result = new StringBuilder();
+        for(int i=0;i<words.length;i++)
+        {
+            result.append(words[i]);
+            if(i<words.length-1)
+            {
+                result.append(" ");
+            }
+        }
+        return result.toString();
+    }
+
+    public static String reverseFirstAndLastWords(String s)
+    {
+        StringBuilder result = new StringBuilder();
+        String[] words = s.split("\\s+");
+        if(words.length==1)
+            return reverseStr(words[0]);
+
+        String firstRev = reverseStr(words[0]);
+        String lastRev = reverseStr(words[words.length-1]);
+        words[0] = firstRev;
+        words[words.length-1] = lastRev;
+        for(int i=0;i<words.length;i++)
+        {
+            result.append(words[i]);
+            if(i<words.length-1)
+            {
+                result.append(" ");
+            }
+        }
+        return result.toString();
+    }
+
+    public static void swapArrayElements(int[] a,int c,int d)
+    {
+        int temp = a[c];
+        a[c] = a[d];
+        a[d] = temp;
+        System.out.println("After swapping: "+Arrays.toString(a));
+    }
+
+    public static void swapTwoString(String s1,String s2)
+    {
+        System.out.println("Initially first string is: "+s1);
+        System.out.println("Initially second string is: "+s2);
+        int firstLen = s1.length();
+        s1 = s1+s2;
+        s2 = s1.substring(0,firstLen);
+        s1 = s1.substring(firstLen);
+        System.out.println("After swap first string is: "+s1);
+        System.out.println("After swap second string is: "+s2);
+    }
+
+    public static String printFullReflectedString(String s)
+    {
+        String[] words = s.split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(String w:words)
+        {
+            sb.append(w).append(" ");
+        }
+        for(int i=words.length-1;i>=0;i--)
+        {
+            sb.append(words[i]);
+            if(i>0)
+            {
+                sb.append(" ");
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String printLastWordEchoed(String s)
+    {
+        StringBuilder sb = new StringBuilder();
+        String[] words = s.split("\\s+");
+        for(int i=0;i<words.length;i++)
+        {
+            sb.append(words[i]);
+            if(i<words.length-1)
+            {
+                sb.append(" ");
+            }
+        }
+        sb.append(" ").append(words[words.length-1]);
+        return sb.toString();
     }
 }
