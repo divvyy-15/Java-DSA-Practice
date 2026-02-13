@@ -353,11 +353,18 @@ public class Mixed_topics_practice {
 //77.The last word echo: Take a string of words and repeat the very last word one extra time
         System.out.println("Last word echoed: "+printLastWordEchoed(s34));
 
-//78.
+//78.Find common elements in two arrays
+        int[] a41 = {1,2,3,4};
+        int[] a42 = {3,4,5,6};
+        System.out.println("Common elements in both arrays: "+findCommonEleInTwoArrays(a41,a42));
 
-//79.
+//79.Write a function that takes an integer array and returns a list of all elements that have a frequency of exactly 1
+        int[] a43 = {1,2,3,2,4,1};
+        System.out.println("Unique elements in the array: "+printUniqueArray(a43));
 
-//80.
+//80.Count the occurrence of a character in the given string
+        String s35 = "java programming";
+        System.out.println("Occurrence of the character: "+findOccOfCharInString(s35,'a'));
     }
 
     public static void maxMinArray(int[] a) {
@@ -1652,5 +1659,57 @@ public class Mixed_topics_practice {
         }
         sb.append(" ").append(words[words.length-1]);
         return sb.toString();
+    }
+
+    public static List<Integer> findCommonEleInTwoArrays(int[] a,int[] b)
+    {
+        List<Integer> result = new ArrayList<>();
+        HashSet<Integer> hs = new HashSet<>();
+        for(int num:a)
+        {
+            hs.add(num);
+        }
+        for(int i=0;i<b.length;i++)
+        {
+            if(hs.contains(b[i]) && !result.contains(b[i]))
+            {
+                result.add(b[i]);
+            }
+        }
+        return result;
+    }
+
+    public static List<Integer> printUniqueArray(int[] a)
+    {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        for(int num:a)
+        {
+            hm.put(num,hm.getOrDefault(num,0)+1);
+        }
+        for(Map.Entry<Integer,Integer>m:hm.entrySet())
+        {
+            if(m.getValue()==1)
+            {
+                result.add(m.getKey());
+            }
+        }
+        return result;
+    }
+
+    public static int findOccOfCharInString(String s,char c)
+    {
+        int count = 0;
+        s = s.toLowerCase();
+        for(int i=0;i<s.length();i++)
+        {
+            char ch = s.charAt(i);
+            if(ch==c)
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 }
