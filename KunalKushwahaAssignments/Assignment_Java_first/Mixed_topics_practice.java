@@ -365,6 +365,16 @@ public class Mixed_topics_practice {
 //80.Count the occurrence of a character in the given string
         String s35 = "java programming";
         System.out.println("Occurrence of the character: "+findOccOfCharInString(s35,'a'));
+
+//81.Count each character frequency in the string without using hashmap
+        String s36 = "hello";
+        countEachCharFreqWithoutHM(s36);
+
+//82.Print Char Twice if Not Already Duplicated
+        String s37 = "hello";
+        System.out.println("After duplicating singles: "+duplicateSingles(s37));
+
+//83.
     }
 
     public static void maxMinArray(int[] a) {
@@ -1711,5 +1721,52 @@ public class Mixed_topics_practice {
         }
 
         return count;
+    }
+
+    public static void countEachCharFreqWithoutHM(String s)
+    {
+        int[] freq = new int[26];
+        s = s.toLowerCase();
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            int index = c - 'a';
+            freq[index]++;
+        }
+        for(int i=0;i<freq.length;i++)
+        {
+            if(freq[i]>0)
+            {
+                char c = (char) (i + 'a');
+                System.out.print(c+"=" +freq[i]+ " ");
+            }
+        }
+    }
+
+    public static String duplicateSingles(String s)
+    {
+        int[] freq = new int[26];
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            int ind = c - 'a';
+            freq[ind]++;
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            int ind = c - 'a';
+            if(freq[ind]==1)
+            {
+                sb.append(c).append(c);
+            }
+            else
+            {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
