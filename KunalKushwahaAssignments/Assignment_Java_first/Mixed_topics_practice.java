@@ -374,7 +374,10 @@ public class Mixed_topics_practice {
         String s37 = "hello";
         System.out.println("After duplicating singles: "+duplicateSingles(s37));
 
-//83.
+//83.Check if needle exists in haystack
+        String needle = "wor";
+        String haystack = "hello world";
+        System.out.println("Needle is a substring of Haystack: "+isNeedleSubstringOfHaystack(needle,haystack));
     }
 
     public static void maxMinArray(int[] a) {
@@ -1768,5 +1771,18 @@ public class Mixed_topics_practice {
             }
         }
         return sb.toString();
+    }
+
+    public static boolean isNeedleSubstringOfHaystack(String n,String h)
+    {
+        for(int i=0;i<=h.length()-n.length();i++)
+        {
+            String check = h.substring(i,i+n.length());
+            if(check.equals(n))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
