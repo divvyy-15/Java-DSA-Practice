@@ -12,8 +12,10 @@ public class BaseTest {
     @BeforeMethod
     public void setUp()
     {
-        driver = DriverFactory.getDriver();
-        driver.get(ConfigReader.getProperty("base.url"));
+        //driver = DriverFactory.getDriver();
+        //driver.get(ConfigReader.getProperty("base.url"));
+        DriverFactory.initDriver();
+        DriverFactory.getDriver().get(ConfigReader.getProperty("base.url"));
     }
 
     @AfterMethod
