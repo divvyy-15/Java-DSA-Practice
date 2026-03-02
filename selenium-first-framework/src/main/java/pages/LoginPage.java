@@ -3,6 +3,9 @@ package pages;
 import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import utils.ElementUtils;
 
 public class LoginPage extends BasePage {
@@ -11,13 +14,26 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver)
     {
         super(driver);
+        PageFactory.initElements(driver,this);
     }
 
-    //Locators
+    /*Locators
     By usernameField = By.id("username");
     By pwdField = By.id("password");
     By submitBtn = By.id("submit");
-    By errorMsg = By.id("error");
+    By errorMsg = By.id("error");*/
+
+    @FindBy(id="username")
+    WebElement usernameField;
+
+    @FindBy(id="password")
+    WebElement pwdField;
+
+    @FindBy(id="submit")
+    WebElement submitBtn;
+
+    @FindBy(id="error")
+    WebElement errorMsg;
 
     //Actions
     public void enterUsername(String uName)
