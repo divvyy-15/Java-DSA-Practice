@@ -23,7 +23,8 @@ public class SampleTest extends BaseTest {
         //Assert.assertTrue(sp.getSuccessMsg().contains("Logged In Successfully"),"Login was not successful");
         //Assert.assertTrue(sp.isLogoutButtonDisplayed(),"Log out button is not displayed!");
 
-        sa.assertTrue(sp.getSuccessMsg().contains("Logged In Successfully"),"Login was not successful");
+        //sa.assertTrue(sp.getSuccessMsg().contains("Logged In Successfully"),"Login was not successful");
+        sa.assertTrue(sp.getSuccessMsg().contains("wrong text"),"Login was not successful");
         sa.assertTrue(sp.isLogoutButtonDisplayed());
         sa.assertAll();
 
