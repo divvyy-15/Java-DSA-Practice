@@ -14,6 +14,18 @@ public class Week1_Strings {
         String st2 = "A man, a plan, a canal: Panama";
         System.out.println("The given string is a valid palindrome? "+isPalindrome(s2));
         System.out.println("The given string is a valid palindrome? "+isPalindromeMemoryOptimised(st2));
+
+        //Que3: Check whether the number is a palindrome without converting it to a String
+        int num1 = 121;
+        System.out.println("The given number is a Palindrome? "+isNumPalindrome(num1));
+
+        //Que4: Swap two integers & String without a third variable
+        int num2 = 50;
+        int num3 = 100;
+        String s3 = "Hello";
+        String s4 = "World";
+        swapIntegers(num2,num3);
+        swapStrings(s3,s4);
     }
 
     public static String revStringApp1(String s)
@@ -122,5 +134,54 @@ public class Week1_Strings {
             }
         }
         return true;
+    }
+
+    public static boolean isNumPalindrome(int n)
+    {
+        //1.Store the original in an integer variable so that it remains unchanged for comparison
+        int original = n;
+        int rev = 0;
+        //2.Handle negative numbers
+        if(n<0)
+        {
+            return false;
+        }
+        //3.reverse the number mathematically (modulo-division)
+        while(n>0)
+        {
+            int rem = n%10;
+            rev = rev*10 + rem;
+            n = n/10;
+        }
+        //4.If the reverse of the number == original number, return true else false
+        return rev == original;
+    }
+
+    public static void swapIntegers(int n1,int n2)
+    {
+        System.out.println("Before swap, value of first variable: "+n1);
+        System.out.println("After swap, value of second variable: "+n2);
+        //1.Combine: Add both numbers and store the total in the first variable
+        n1 = n1 + n2;
+        //2.Isolate First: Subtract the second variable from the total to get the original first value; store this in the second variable
+        n2 = n1 - n2;
+        //3.Isolate Second: Subtract the new second variable from the total to get the original second value; store this in the first variable
+        n1 = n1 - n2;
+        System.out.println("After swap, value of first variable: "+n1);
+        System.out.println("After swap, value of second variable: "+n2);
+    }
+
+    public static void swapStrings(String s1,String s2)
+    {
+        System.out.println("Before swap, value of first variable: "+s1);
+        System.out.println("After swap, value of second variable: "+s2);
+        //1.Append both the strings into one
+        s1 = s1 + s2; //JavaAutomation, s1.length=14,s2=10
+        //2.Extract first part of the new String to store in second variable
+        s2 = s1.substring(0,s1.length()-s2.length());
+        //3.Now take the remaining part of the string and store in first variable
+        s1 = s1.substring(s2.length());
+        System.out.println("After swap, value of first variable: "+s1);
+        System.out.println("After swap, value of second variable: "+s2);
     }
 }
