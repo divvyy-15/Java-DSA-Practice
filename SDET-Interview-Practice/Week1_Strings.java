@@ -26,6 +26,18 @@ public class Week1_Strings {
         String s4 = "World";
         swapIntegers(num2,num3);
         swapStrings(s3,s4);
+
+        //Que5: Count vowels and consonants in the given string
+        String s5 = "Universe 15 listens";
+        countVowelsConsonants(s5);
+
+        //Que6: Remove non-letter characters from the string
+        String s6 = "Divyanshi123@";
+        System.out.println("After removing non-letter characters: "+removeNonLetter(s6));
+
+        //Que7: Print even-indexed characters of the string
+        String s7 = "Automation";
+        System.out.println("Even indexed characters of the string: "+printEvenIndexedChars(s7));
     }
 
     public static String revStringApp1(String s)
@@ -183,5 +195,70 @@ public class Week1_Strings {
         s1 = s1.substring(s2.length());
         System.out.println("After swap, value of first variable: "+s1);
         System.out.println("After swap, value of second variable: "+s2);
+    }
+
+    public static void countVowelsConsonants(String s)
+    {
+        //1.declare the variables that will hold the vowels and consonants count
+        int vowelsCount = 0;
+        int consonantCount = 0;
+        //2.Traverse the entire string
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.toLowerCase().charAt(i);
+            //3.Check whether the character in the string is a vowel, if so we increase the count stored in vowelsCount variable
+            if(Character.isLetter(c))
+            {
+                switch(c)
+                {
+                    case 'a': case 'e': case 'i': case 'o': case 'u':
+                        vowelsCount++;
+                        break;
+                    default:
+                        consonantCount++; //4.If not vowel,it should be a valid letter so then we can increase consonants count variable
+                }
+            }
+        }
+        //5.Print the final counts for vowels and consonants
+        System.out.println("Number of vowels in the String: "+vowelsCount);
+        System.out.println("Number of consonants in the String: "+consonantCount);
+    }
+
+    public static String removeNonLetter(String s)
+    {
+        //can directly solve with regex:
+        //return s.replaceAll("[^a-zA-Z]","");
+
+        //1.Declare a stringBuilder that will store the resultant string
+        StringBuilder sb = new StringBuilder();
+        //2.Traverse the entire string
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            //3.Check if the character is letter, then add it to the stringbuilder
+            if(Character.isLetter(c))
+            {
+                sb.append(c);
+            }
+        }
+        //4.Return the final string
+        return sb.toString();
+    }
+
+    public static String printEvenIndexedChars(String s)
+    {
+        //1.Declare a stringBuilder which will hold the final output string
+        StringBuilder sb = new StringBuilder();
+        //2.Traverse the entire string
+        for(int i=0;i<s.length();i++)
+        {
+            //3.Check if the index is even, then add it to stringBuilder
+            if(i%2==0)
+            {
+                sb.append(s.charAt(i));
+            }
+        }
+        //4.return the final string
+        return sb.toString();
     }
 }
