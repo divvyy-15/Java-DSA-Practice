@@ -1,7 +1,5 @@
 package com.SDET_Interview_Prep;
 
-import java.util.Arrays;
-
 public class Week1_Strings {
     public static void main(String[] args) {
         //Que1: Reverse a String - Approach 1:Use StringBuilder, Approach 2:Two-pointer approach
@@ -38,6 +36,27 @@ public class Week1_Strings {
         //Que7: Print even-indexed characters of the string
         String s7 = "Automation";
         System.out.println("Even indexed characters of the string: "+printEvenIndexedChars(s7));
+
+        //Que8: Print each character twice
+        String s8 = "Java";
+        System.out.println("All characters printed twice in the string: "+printTwice(s8));
+
+        //Que9: Separate letters, digits & special characters from string
+        String s9 = "Divy123@!";
+        separateLettersDigitsSplChars(s9);
+
+        //Que10: Check if String contains only digits
+        String s10 = "2026a";
+        System.out.println("The string contains only digits: "+ containsOnlyDigits(s10));
+
+        //Que11: Prime number check
+        int num4 = 25;
+        System.out.println("Given number is Prime? "+isPrimeNum(num4));
+
+        //Que12: GCD of two numbers
+        int num5 = 12;
+        int num6 = 8;
+        System.out.println("Greatest common divisor of the given numbers is: "+gcdNums(num5,num6));
     }
 
     public static String revStringApp1(String s)
@@ -260,5 +279,121 @@ public class Week1_Strings {
         }
         //4.return the final string
         return sb.toString();
+    }
+
+    public static String printTwice(String s)
+    {
+        //1.Declare a string builder to hold the final string
+        StringBuilder sb = new StringBuilder();
+        //2.Check if the string is null or empty
+        if(s==null || s.isEmpty())
+        {
+            return "";
+        }
+        //3.Traverse the entire string
+        for(int i=0;i<s.length();i++)
+        {
+            //4.Append each character twice to the stringBuilder
+            char c = s.charAt(i);
+            sb.append(c).append(c);
+        }
+        //5.return the String
+        return sb.toString();
+    }
+
+    public static void separateLettersDigitsSplChars(String s)
+    {
+        //1.Check if the string is null or empty
+        if(s==null || s.isEmpty())
+        {
+            System.out.println("The String is null or empty!");
+        }
+        //2.Declare 3 different string builder to store the characters separately
+        StringBuilder letters = new StringBuilder();
+        StringBuilder digits = new StringBuilder();
+        StringBuilder splChars = new StringBuilder();
+        //3.Traverse the entire string
+        for(int i=0;i<s.length();i++)
+        {
+            //4.Check and separate based on conditions, append to the appropriate string builder accordingly
+            char c = s.charAt(i);
+            if(Character.isLetter(c))
+            {
+                letters.append(c);
+            } else if (Character.isDigit(c)) {
+                digits.append(c);
+            }
+            else {
+                splChars.append(c);
+            }
+        }
+        //5.Print the Stringbuilders
+        System.out.println("The letters in the String: "+letters.toString());
+        System.out.println("The digits in the String: "+digits.toString());
+        System.out.println("The special characters in the String: "+splChars.toString());
+    }
+
+    public static boolean containsOnlyDigits(String s)
+    {
+        //1.check if String is empty or null
+        if(s==null || s.isEmpty())
+        {
+            return false;
+        }
+        //2.Traverse the entire string from start to end
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            //3.Check each character if it is not a digit immediately return false
+            if(!Character.isDigit(c))
+            {
+                return false;
+            }
+        }
+        //4. else return true
+        return true;
+    }
+
+    public static boolean isPrimeNum(int n)
+    {
+        //1.Initialise a boolean flag variable
+        boolean result = true;
+        //2.check if number is less than 1
+        if(n<=1)
+        {
+            result = false;
+        }
+        //2.Now in a for loop we check the divisibility of the number: if divisible by number other than 1 and itself we make flag false
+        //Optimisation: we start for loop from 2 up to square root of the given number because a number that is greater than the sq root
+        //of the given number will never divide the number anyway
+        for(int i=2;i<=Math.sqrt(n);i++)
+        {
+            if(n%i==0)
+            {
+                result = false;
+                break;
+            }
+        }
+        //3.else make flag true and return it
+        return result;
+    }
+
+    public static int gcdNums(int n1,int n2)
+    {
+        //1.check if number is less than 0
+        if(n1<0 || n2<0)
+        {
+            return 0;
+        }
+        //2.To find HCF we use Euclidean algo which says:
+        //GCD(a,b) = GCD(b,a%b) -- take it as shrinking game: we shrink the number unless one of them becomes zero (remainder) and if one
+        //becomes 0, another is the answer!
+        while(n2!=0)
+        {
+            int rem = n1%n2;
+            n1 = n2;
+            n2 = rem;
+        }
+        return n1;
     }
 }
