@@ -1,5 +1,7 @@
 package com.SDET_Interview_Prep;
 
+import java.util.Arrays;
+
 public class Week2_Arrays {
     public static void main(String[] args) {
         //Que 1: Find Second-largest number in an Array
@@ -9,6 +11,14 @@ public class Week2_Arrays {
         //Que 2: Reverse words in a sentence
         String s1 = "Java is fun";
         System.out.println("After reversing the words: "+revWordsInSentence(s1));
+
+        //Que 3: Move zeroes to the end
+        int[] arr2 = {0 ,1, 0, 3, 12};
+        System.out.println("After moving zeroes to the end: "+Arrays.toString(moveZeroesToEnd(arr2)));
+
+        //Que 4: Move negatives to start
+        int[] arr3 = {-1, 12, -7, 3, -2};
+        System.out.println("After moving negatives to start: "+Arrays.toString(moveNegativesToStart(arr3)));
     }
 
     public static int secLargestInArray(int[] a)
@@ -70,5 +80,54 @@ public class Week2_Arrays {
             }
         }
         return sb.toString();
+    }
+
+    public static int[] moveZeroesToEnd(int[] a)
+    {
+        //1.Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("The array passed is empty!");
+        }
+        //2.Initialize the variable that tracks where the position for non-zero element should be
+        int insertPos = 0;
+        //3.Traverse the entire array
+        for(int i=0;i<a.length;i++)
+        {
+            //4.Check the condition for non-zero element
+            if(a[i]!=0)
+            {
+                int temp = a[i];
+                a[i] = a[insertPos];
+                a[insertPos] = temp;
+                insertPos++;
+            }
+        }
+        return a;
+    }
+
+    public static int[] moveNegativesToStart(int[] a)
+    {
+        //1.Check if the array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Array is empty!");
+        }
+        //2.Initialize the variable that will track the position of negative numbers
+        int insertPos = 0;
+        //3.Traverse the entire array
+        for(int i=0;i<a.length;i++)
+        {
+            //4.Check condition for negative number
+            if(a[i]<0)
+            {
+                int temp = a[i];
+                a[i] = a[insertPos];
+                a[insertPos] = temp;
+                insertPos++;
+            }
+        }
+        //5.Return the array
+        return a;
     }
 }
