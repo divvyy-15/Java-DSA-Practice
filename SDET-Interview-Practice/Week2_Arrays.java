@@ -19,6 +19,16 @@ public class Week2_Arrays {
         //Que 4: Move negatives to start
         int[] arr3 = {-1, 12, -7, 3, -2};
         System.out.println("After moving negatives to start: "+Arrays.toString(moveNegativesToStart(arr3)));
+
+        //Que 5: Rotate the array by k
+        int[] arr4 = {1, 2, 3, 4, 5};
+        int k = 2;
+        System.out.println("After rotation of array: "+Arrays.toString(rotateArray(arr4,k)));
+
+        //Que 6: Merge two sorted arrays
+        int[] arr5 = {1, 3, 5};
+        int[] arr6 = {2, 4, 6};
+        System.out.println("After merging the two sorted arrays: "+Arrays.toString(mergeArrays(arr5,arr6)));
     }
 
     public static int secLargestInArray(int[] a)
@@ -129,5 +139,73 @@ public class Week2_Arrays {
         }
         //5.Return the array
         return a;
+    }
+
+    public static void reverseRange(int[] a,int start,int end){
+        while(start<end)
+        {
+            int temp = a[start];
+            a[start] = a[end];
+            a[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static int[] rotateArray(int[] a,int k)
+    {
+        //1.Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Array is null or Empty!!");
+        }
+        //2.Reverse the entire array
+        reverseRange(a,0,a.length-1);
+        //3.Reverse first k elements
+        reverseRange(a,0,k-1);
+        //4.Reverse elements at positions k+1 till end of the array
+        reverseRange(a,k,a.length-1);
+        //5.Return the array
+        return a;
+    }
+
+    public static int[] mergeArrays(int[] a,int[] b)
+    {
+        //1.Initialize a resultant array of combined length of both arrays
+        int[] result = new int[a.length+b.length];
+        //2.Initialize pointers that tracks the position in resultant array
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        //3.Compare elements in both arrays to put into resultant array
+        while(i<a.length && j<b.length)
+        {
+            if(a[i]<b[j])
+            {
+                result[k] = a[i];
+                k++;
+                i++;
+            }
+            else {
+                result[k] = b[j];
+                k++;
+                j++;
+            }
+        }
+        //4.If Array A has some leftover elements
+        while(i<a.length)
+        {
+            result[k] = a[i];
+            k++;
+            i++;
+        }//5.If Array B has some leftover elements
+        while(j<b.length)
+        {
+            result[k] = b[j];
+            k++;
+            j++;
+        }
+        //6.Return array
+        return result;
     }
 }
