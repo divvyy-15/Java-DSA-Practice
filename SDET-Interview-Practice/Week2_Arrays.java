@@ -29,6 +29,18 @@ public class Week2_Arrays {
         int[] arr5 = {1, 3, 5};
         int[] arr6 = {2, 4, 6};
         System.out.println("After merging the two sorted arrays: "+Arrays.toString(mergeArrays(arr5,arr6)));
+
+        //Que 7: Move all even numbers in the front
+        int[] arr7 = {1, 2, 3, 4, 5, 6};
+        System.out.println("After moving all even numbers: "+Arrays.toString(moveEven(arr7)));
+
+        //Que 8: Check if array is sorted
+        int[] arr8 = {1, 5, 10, 20};
+        System.out.println("Is the Array sorted? "+isArraySorted(arr8));
+
+        //Que 9: Sum of all elements in the array
+        int[] arr9 = {-1, 2, 5};
+        System.out.println("Sum of all elements in the array is: "+sumOfEleInArr(arr9));
     }
 
     public static int secLargestInArray(int[] a)
@@ -207,5 +219,65 @@ public class Week2_Arrays {
         }
         //6.Return array
         return result;
+    }
+
+    public static int[] moveEven(int[] a)
+    {
+        //1.Check if the array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw  new IllegalArgumentException("Array passed is empty!");
+        }
+        //2.Initialize a pointer that tracks the position where even numbers would go
+        int insertPos = 0;
+        //3.Traverse the array entirely
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]%2==0)
+            {
+                int temp = a[insertPos];
+                a[insertPos] = a[i];
+                a[i] = temp;
+                insertPos++;
+            }
+        }
+        //4.Return the array
+        return a;
+    }
+
+    public static boolean isArraySorted(int[] a)
+    {
+        //1.Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            return false;
+        }
+        //2.In an ascending Sorted array, the previous element is always lesser than the next, use this for comparison
+        for(int i=0;i<a.length-1;i++)
+        {
+            if(a[i]>a[i+1])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int sumOfEleInArr(int[] a)
+    {
+        //1.Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is empty!");
+        }
+        //2.Initialize a sum variable that will store the sum of elements
+        int sum = 0;
+        //3.Traverse entire array
+        for(int i=0;i<a.length;i++)
+        {
+            sum = sum + a[i];
+        }
+        //4.Return the sum
+        return sum;
     }
 }
