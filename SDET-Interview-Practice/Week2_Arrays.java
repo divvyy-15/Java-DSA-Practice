@@ -91,7 +91,7 @@ public class Week2_Arrays {
         {
             return "String is null or Empty!";
         }
-        //2.Initialise a Stirngbuilder
+        //2.Initialise a Stringbuilder
         StringBuilder sb = new StringBuilder();
         //3.Create a String array of the string
         String[] words = s.split("\\s+");
