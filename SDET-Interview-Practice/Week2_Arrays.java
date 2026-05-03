@@ -41,6 +41,20 @@ public class Week2_Arrays {
         //Que 9: Sum of all elements in the array
         int[] arr9 = {-1, 2, 5};
         System.out.println("Sum of all elements in the array is: "+sumOfEleInArr(arr9));
+
+        //Que 10: Modify the array so that each unique element appears only once at the beginning.
+        // Return the length of the unique portion.
+        int[] arr10 = {0, 0, 1, 1, 1, 2, 2, 3};
+        System.out.println("Number of unique elements in the array: "+removeDuplicates(arr10));
+
+        //Que 11: Find leaders in an array. An element is a leader if it is greater than all the elements to its right.
+        // The rightmost element is always a leader.
+        int[] arr11 = {16, 17, 4, 3, 5, 2};
+        System.out.println("Leaders in the array: "+Arrays.toString(leadersOfArray(arr11)));
+
+        //Que 12: Given a string and a number N, reverse only the words that have a length greater than N.
+        String s2 = "Coding is fun";
+        System.out.println("After reversing required words: "+reverseOnlyGreaterThan(s2,2));
     }
 
     public static int secLargestInArray(int[] a)
@@ -279,5 +293,101 @@ public class Week2_Arrays {
         }
         //4.Return the sum
         return sum;
+    }
+
+    public static int removeDuplicates(int[] a)
+    {
+        //1.Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is empty!");
+        }
+        //2.If input array has only one element then it is already unique
+        if(a.length==1)
+        {
+            return 1;
+        }
+        //3.Initialize a variable that will track the position where unique number will be inserted i.e.INDEX of the last known unique element
+        int insertPos = 0;
+        //4.Traverse the entire array starting from index 1 as we don't want to compare a[0] with a[0]
+        for(int i=1;i<a.length;i++)
+        {
+            if(a[insertPos] != a[i])
+            {
+                insertPos++; //Increment insertPos before the assignment as it ensures we don't overwrite the current unique element but instead "claim" the next empty slot for the new discovery.
+                a[insertPos] = a[i];
+            }
+        }
+        //5.Return the length of unique elements which will be index+1
+        return insertPos+1;
+    }
+
+    public static int[] leadersOfArray(int[] a)
+    {
+        //1.Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is empty!");
+        }
+        //2.Create an empty integer array of length equal to length of original array to store the result
+        int[] res = new int[a.length];
+        //3.Initialize a variable that stores the max value so far, as last element is leader by default, initialize with this value
+        int maxSoFar = a[a.length-1];
+        //4.Initialize an index variable for resultant array
+        int index = 0;
+        //5.Update first value in the result array
+        res[index] = maxSoFar;
+        index++;
+        //6.Traverse the array from end to the beginning or right-left
+        for(int i=a.length-2;i>=0;i--)
+        {
+            //7.If the current value is greater than max we update the variable accordingly and add to the result as well
+            if(a[i]>maxSoFar)
+            {
+                maxSoFar = a[i];
+                res[index] = maxSoFar;
+                index++;
+            }
+        }
+        //8.Trim the trailing zeros in the resultant array and return it
+        int[] result = Arrays.copyOf(res,index);
+        //9.As we started backwards our results would be reversed, so reverse again to get actual values
+        reverseRange(result,0,index-1);
+        return result;
+    }
+
+    public static String reverseOnlyGreaterThan(String s,int c)
+    {
+        //1.Check is String is null or emtpy
+        if(s==null || s.isEmpty())
+        {
+            throw new IllegalArgumentException("Input String is null or empty!");
+        }
+        //2.Split the string to create String array
+        String[] words = s.split("\\s+");
+        //3.Initialize a StringBuilder to store the resultant string
+        StringBuilder sb = new StringBuilder();
+        //4.Traverse the array
+        for(int i=0;i<words.length;i++)
+        {
+            String currWord = words[i];
+            if(currWord.length()>c)
+            {
+                for(int j = currWord.length()-1; j >=0; j--)
+                {
+                    char c1 = currWord.charAt(j);
+                    sb.append(c1);
+                }
+            }
+            else {
+                sb.append(currWord);
+            }
+            if(i< words.length-1)
+            {
+                sb.append(" ");
+            }
+        }
+        //6.Return the Stringbuilder
+        return sb.toString();
     }
 }
