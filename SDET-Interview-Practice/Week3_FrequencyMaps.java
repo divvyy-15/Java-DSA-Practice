@@ -1,7 +1,9 @@
 package com.SDET_Interview_Prep;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class Week3_FrequencyMaps {
     public static void main(String[] args) {
@@ -20,6 +22,14 @@ public class Week3_FrequencyMaps {
         //Que 4: Check if the array contains duplicate i.e. Return true if any value appears at least twice
         int[] arr2 = {1, 2, 3, 1}; //true
         System.out.println("Does array contain any duplicate element: "+containsDuplicate(arr2));
+
+        //Que 5: Find all duplicates in an array
+        int[] arr3 = {4, 3, 2, 7, 8, 2, 3, 1};
+        System.out.println("All duplicates in an array: "+ allDuplicatesInArray(arr3));
+
+        //Que 6: Find first unique/non-repeating character in the string
+        String s3 = "leetcode";
+        System.out.println("First unique character of the string is: "+firstUniqueCharacter(s3));
     }
 
     public static HashMap<Character, Integer> charOccCount(String s)
@@ -105,5 +115,57 @@ public class Week3_FrequencyMaps {
         }
         //5.Else return false
         return false;
+    }
+
+    public static HashSet<Integer> allDuplicatesInArray(int[] a)
+    {
+        //1.Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is empty");
+        }
+        //2.Declare a List to store duplicates
+        HashSet<Integer> seen = new HashSet<>();
+        //3.Declare a hashset to filter the duplicates
+        HashSet<Integer> duplicates = new HashSet<>();
+        //4.Loop through entire array
+        for(int num:a)
+        {
+            //4.Wherever we fail to add the integer in the hashset that is our duplicate, add to the second hashset
+            if(!seen.add(num))
+            {
+                duplicates.add(num);
+            }
+        }
+        //5.Return the list
+        return duplicates;
+        //return new ArrayList<>(duplicates);  --if list is asked to be reduced
+    }
+
+    public static char firstUniqueCharacter(String s)
+    {
+        //1.Check String is null or empty
+        if(s==null || s.isEmpty())
+        {
+            throw new IllegalArgumentException("Empty or null input string");
+        }
+        //2.Declare a hashMap to store character and it's count
+        HashMap<Character,Integer> hm = new HashMap<>();
+        //3.Loop through the String to populate character and it's count in the hashMap
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            hm.put(c, hm.getOrDefault(c,0)+1);
+        }
+        //4.Now loop through the string again and check count of character in map, as soon as value is 1 return the character
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            if(hm.get(c)==1)
+            {
+                return c;
+            }
+        }
+        throw new RuntimeException("No Unique character found!");
     }
 }
