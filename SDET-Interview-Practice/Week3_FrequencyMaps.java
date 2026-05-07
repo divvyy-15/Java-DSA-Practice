@@ -1,9 +1,6 @@
 package com.SDET_Interview_Prep;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class Week3_FrequencyMaps {
     public static void main(String[] args) {
@@ -30,6 +27,20 @@ public class Week3_FrequencyMaps {
         //Que 6: Find first unique/non-repeating character in the string
         String s3 = "leetcode";
         System.out.println("First unique character of the string is: "+firstUniqueCharacter(s3));
+
+        //Que 7: Given an array of integers and an integer target, return indices of the two numbers such that they add up to target.
+        int[] arr4 = {2, 7, 11, 15};
+        int target = 9;
+        System.out.println("Indices of the numbers that add up to target: "+ Arrays.toString(twoSum(arr4,target)));
+
+        //Que 8: Given two arrays, find the numbers that appear in both
+        int[] arr5 = {1, 2};
+        int[] arr6 = {2, 3};
+        System.out.println("The elements that appear in both input arrays: "+intersectionOfArrays(arr5,arr6));
+
+        //Que 9: Remove duplicate words from the string
+        String s4 = "alpha beta alpha";
+        System.out.println("After removing duplicate words: "+removeDuplicateWords(s4));
     }
 
     public static HashMap<Character, Integer> charOccCount(String s)
@@ -167,5 +178,84 @@ public class Week3_FrequencyMaps {
             }
         }
         throw new RuntimeException("No Unique character found!");
+    }
+
+    public static int[] twoSum(int[] a,int target)
+    {
+        //1.Check if input array is null or has lesser than 2 elements
+        if(a==null || a.length<2)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2.Initialize a map to store value, indices
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        //3.Traverse the entire array and populate map
+        for(int i=0;i<a.length;i++)
+        {
+            int complement = target - a[i];
+            if(hm.containsKey(complement))
+            {
+                return new int[] {hm.get(complement),i};
+            }
+            else
+            {
+                hm.put(a[i],i);
+            }
+        }
+        throw new RuntimeException("No pair found!");
+    }
+
+    public static ArrayList<Integer> intersectionOfArrays(int[] a, int[] b)
+    {
+        //1.Check if array is null or empty
+        if(a==null || b==null || a.length==0 || b.length==0)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2.Initialize a hashSet for storing unique elements from first array
+        HashSet<Integer> hsFirst = new HashSet<>();
+        //3.Initialize another HashSet to store unique result elements
+        HashSet<Integer> result = new HashSet<>();
+        //4.Traverse first array to store it in the set
+        for(int num:a)
+        {
+            hsFirst.add(num);
+        }
+        //5.Traverse second array and check which elements are present in hashSet storing first array elements
+        for(int num:b)
+        {
+            if(hsFirst.contains(num))
+            {
+                result.add(num);
+            }
+        }
+        //5.Return the result
+        return new ArrayList<>(result);
+    }
+
+    public static String removeDuplicateWords(String s)
+    {
+        //1.Check if string is null or empty
+        if(s==null || s.isEmpty())
+        {
+            throw new IllegalArgumentException("Input String is empty!");
+        }
+        //2.Initialize a linkedHashSet to store ordered unique words from the string
+        LinkedHashSet<String> result = new LinkedHashSet<>();
+        //3.Create an array of words
+        String[] words = s.split("\\s+");
+        //4.Initialize a StringBuilder
+        StringBuilder sb = new StringBuilder();
+        //5.Traverse through the entire array and add to the set
+        for(String w:words)
+        {
+            result.add(w);
+        }
+        //6.Create a String from the set elements and return it
+        for(String word:result)
+        {
+            sb.append(word).append(" ");
+        }
+        return sb.toString().trim();
     }
 }
