@@ -99,6 +99,31 @@ public class Week4_slidingWindowAndOtherMiscPrbs {
 
     public static int findContiguousSubArrWithLargestSum(int[] a)
     {
-        
+        //1)Check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2)Initialize a variable currentSum to track the running total=arr[0]
+        int currentSum = a[0];
+        //3)Then initialize another variable maxSoFar to track what is the highest sum we have gotten so far=arr[0]
+        int maxSoFar = a[0];
+        //4)Start a for loop from 1 upto length of the array
+        for(int i=1;i<a.length;i++)
+        {
+            //5)Check if currentSum is a negative number, if so reset it
+            if(currentSum<0)
+            {
+                currentSum=0;
+            }
+            //6.Now add current element to currSUm and compare it with maxSoFar --> if it's bigger update maxSoFar
+            currentSum = currentSum + a[i];
+            if(currentSum>maxSoFar)
+            {
+                maxSoFar = currentSum;
+            }
+        }
+        //7)At the end we need to return the maxSoFar i.e. the maximum we could get from the given array that was contiguous
+        return maxSoFar;
     }
 }
