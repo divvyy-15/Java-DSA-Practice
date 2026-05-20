@@ -19,9 +19,11 @@ public class Week4_slidingWindowAndOtherMiscPrbs {
         System.out.println("Largest sum of the contiguous sub-array is: "+findContiguousSubArrWithLargestSum(arr2));
 
         //Que 4: Given prices on different days, find the max profit you can make by buying once and selling once in the future.
-
-        //Que 5: You are given an array of size $n-1$ containing distinct numbers in the range $[1, n]$. Find the one missing number.
-
+        int[] arr3 = {7, 1, 5, 3, 6, 4};
+        System.out.println("Max profit that can be made by buying and selling once is: "+profitAfterSellingStocks(arr3));
+        //Que 5: You are given an array of size n-1 containing distinct numbers in the range [1, n]. Find the one missing number.
+        int[] arr4 = {1, 2, 4, 6, 3, 7};
+        System.out.println("The missing number is: "+findMissingNumber(arr4,7));
         //Que 6: Given a sorted array and a target, return the index if found. If not, return the index where it would be if inserted in order.
 
         //Que 7: A sorted array was rotated at some pivot (e.g., [4,5,6,7,0,1,2]). Search for a target in $O(\log n)$ time.
@@ -125,5 +127,61 @@ public class Week4_slidingWindowAndOtherMiscPrbs {
         }
         //7)At the end we need to return the maxSoFar i.e. the maximum we could get from the given array that was contiguous
         return maxSoFar;
+    }
+
+    public static int profitAfterSellingStocks(int[] a)
+    {
+        //1)Check if the array of prices is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2)initialize a variable currCostPrice to a[0], to keep track of the minimum price to maximize profit we have got so far
+        int currCostPrice = a[0];
+        //3)Initialize a variable maxProfit to 0, that tracks the profit we will make
+        int maxProfit = 0;
+        //4)start a for loop from 1 upto the array length
+        for(int i=1;i<a.length;i++)
+        {
+            //5.Initialize another variable that will track current profit
+            int currProfit = 0;
+            //6)check if a[i]<currCostPrice, then reset currCostPrice to a[i]
+            if(a[i]<currCostPrice)
+            {
+                currCostPrice = a[i];
+            }
+            //7)if a[i]>currCostPrice, then calculate profit for current iteration
+            else {
+                currProfit = a[i] - currCostPrice;
+            }
+            //8)if it is greater than maxProfit, update maxProfit
+            if(currProfit>maxProfit)
+            {
+                maxProfit = currProfit;
+            }
+        }
+        //9)Finally return the maxProfit
+        return maxProfit;
+    }
+
+    public static int findMissingNumber(int[] a,int n)
+    {
+        //1)Check if the array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2)We initialize an expSum variable that will be the mathematical formula of first n natural numbers i.e. n(n+1)/2
+        int expSum = (n*(n+1))/2;
+        //3)Also initialize a variable actualSum to 0
+        int actualSum = 0;
+        //4)Start a for loop on the array from 0 upto array length
+        for(int i=0;i<a.length;i++)
+        {
+            //5)Add all the numbers to actualSum
+            actualSum = actualSum + a[i];
+        }
+        //6)return the difference between expSum and actualSum
+        return expSum - actualSum;
     }
 }
