@@ -21,16 +21,29 @@ public class Week4_slidingWindowAndOtherMiscPrbs {
         //Que 4: Given prices on different days, find the max profit you can make by buying once and selling once in the future.
         int[] arr3 = {7, 1, 5, 3, 6, 4};
         System.out.println("Max profit that can be made by buying and selling once is: "+profitAfterSellingStocks(arr3));
+
         //Que 5: You are given an array of size n-1 containing distinct numbers in the range [1, n]. Find the one missing number.
         int[] arr4 = {1, 2, 4, 6, 3, 7};
         System.out.println("The missing number is: "+findMissingNumber(arr4,7));
-        //Que 6: Given a sorted array and a target, return the index if found. If not, return the index where it would be if inserted in order.
 
-        //Que 7: A sorted array was rotated at some pivot (e.g., [4,5,6,7,0,1,2]). Search for a target in $O(\log n)$ time.
+        //Que 6: Given a sorted array and a target, return the index if found. If not, return the index where it would be
+        // if inserted in order.
+        int[] arr5 = {1, 3, 5, 6};
+        System.out.println("The target is at index/should be inserted at: "+searchInsertPosition(arr5,2));
+
+        //Que 7: A sorted array was rotated at some pivot (e.g., [4,5,6,7,0,1,2]). Given this rotated array and a target number.
+        // Your job is to find the index of that target number in O(log n) time.
+        int[] arr6 = {4, 5, 6, 7, 0, 1, 2};
+        System.out.println("Target is found at index: "+searchTargetInRotatedArray(arr6,0));
+        System.out.println("Target is found at index: "+searchTargetInRotatedArray(arr6,3));
 
         //Que 8: Find the longest common prefix string amongst an array of strings.
+        String[] arr7 = {"flower","flow","flight"};
+        System.out.println("Longest common prefix in the string array is: "+longestCommonPrefixInStringArr(arr7));
 
         //Que 9: Compress a string by replacing consecutive duplicate characters with the character followed by the count.
+
+        //Que 10:
     }
 
     public static void findSubArrWithGivenSum(int[] a,int target)
@@ -183,5 +196,112 @@ public class Week4_slidingWindowAndOtherMiscPrbs {
         }
         //6)return the difference between expSum and actualSum
         return expSum - actualSum;
+    }
+
+    public static int searchInsertPosition(int[] a,int target)
+    {
+        //1.We check if array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2.Then we initialize two index pointers called left and right each at 0 and a.length-1 respectively
+        int left = 0;
+        int right = a.length-1;
+        //3.Now we run a loop over the array
+        while(left<=right)
+        {
+            //4.Find the middle index
+            int mid = (left+right)/2;
+            //5.now find the operating half
+            if(a[mid]==target)  //found it, return the index
+            {
+                return mid;
+            }
+            else if(a[mid]>target) //so target is in the left half
+            {
+                right = mid - 1;
+            }
+            else if (a[mid]<target)  //so target is in the right half
+            {
+                left = mid + 1;
+            }
+        }
+        //5.If we haven't found it after loop is finished means we need to insert it nd where? at left index!
+        return left;
+    }
+
+    public static int searchTargetInRotatedArray(int[] a,int target)
+    {
+        //1.Check if array is null or sorted
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2.Then we initialise two index pointers left and right at 0 & a.length-1
+        int left = 0;
+        int right = a.length - 1;
+        //3.We start a loop as long as left<=right
+        while(left<=right)
+        {
+            //4.We now find the mid-element using (right+left)/2
+            int mid = left + (right-left)/2;
+            //5.Check if mid is equal to the target element if so return mid
+            if(a[mid]==target)
+            {
+                return mid;
+            }
+            //6.Now we need to check which half is sorted,if left half is sorted:
+            if(a[left]<=a[mid])
+            {
+                //target lies between left and mid boundaries
+                if(a[left]<=target && target<a[mid])
+                {
+                    right = mid - 1; //search in left half
+                }
+                else {
+                    left = mid + 1; //search in right
+                }
+            }
+            //7.Else it means right half is sorted
+            else {
+                if(a[mid]<target && target<=a[right])
+                {
+                    left = mid + 1; //search in right half
+                }
+                else {
+                    right = mid - 1; //search left
+                }
+            }
+        }
+        //8. If not found in any of the half
+        return -1;
+    }
+
+    public static String longestCommonPrefixInStringArr(String[] a)
+    {
+        //1.Check if the array is null or empty
+        if(a==null || a.length==0)
+        {
+            throw new IllegalArgumentException("Input array is null or empty!");
+        }
+        //2.Initialize a StringBuilder variable prefix with a[0]
+        String prefix = a[0];
+        //3.Traverse through the entire array
+        for(int i=1;i<a.length;i++)
+        {
+            //4.Then run a while loop with stopping condition: a[i].indexOf(prefix) !=0
+            while(a[i].indexOf(prefix) != 0)
+            {
+                //5.Action to chop off a letter from the end as prefix is not part of a[i]
+                prefix = prefix.substring(0,prefix.length()-1);
+                if(prefix.isEmpty())
+                {
+                    return "";
+                }
+            }
+        }
+        //6.Outside while loop return prefix
+        return prefix;
     }
 }
