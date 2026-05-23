@@ -42,8 +42,13 @@ public class Week4_slidingWindowAndOtherMiscPrbs {
         System.out.println("Longest common prefix in the string array is: "+longestCommonPrefixInStringArr(arr7));
 
         //Que 9: Compress a string by replacing consecutive duplicate characters with the character followed by the count.
+        String s2 = "aabbccc";
+        System.out.println("Compressed String: "+stringCompression(s2));
 
-        //Que 10:
+        //Que 10: You are given a compressed string. Your job is to expand it back to its original, full form.
+        String s3 = "a2b2c3";
+        String s4 = "a12b";
+        System.out.println("Decompressed String: "+stringDecompression(s4));
     }
 
     public static void findSubArrWithGivenSum(int[] a,int target)
@@ -303,5 +308,99 @@ public class Week4_slidingWindowAndOtherMiscPrbs {
         }
         //6.Outside while loop return prefix
         return prefix;
+    }
+
+    public static String stringCompression(String s)
+    {
+        //1.Check whether input string is null or empty
+        if(s==null || s.isEmpty())
+        {
+            throw new IllegalArgumentException("Input string is null or empty!");
+        }
+        //2.Initialize a variable count to 1
+        int count = 1;
+        //3.Initialize a StringBuilder variable result
+        StringBuilder result = new StringBuilder();
+        //4.Start a for loop from 1 upto string length(inclusive to catch the very last character) to traverse the string.
+        // So now s.charAt(i) is a character c which we need to count
+        for(int i=1;i<=s.length();i++)
+        {
+            //5.Then we need a check like if prev and current element are same & less than string.length(), we increase the count variable
+            if(i<s.length() && s.charAt(i)==s.charAt(i-1))
+            {
+                count++;
+            }
+            //6.Else either the character has changed or we have reached the end of the string, so we append the PREV character and count
+            // only if the count is greater than 1 and reset our count variable
+            else
+            {
+                result.append(s.charAt(i-1));
+                if(count>1)
+                {
+                    result.append(count);
+                }
+                count = 1;
+            }
+        }
+        //6.At the end we return the stringBuilder.toString();
+        return result.toString();
+    }
+
+    public static String stringDecompression(String s)
+    {
+        //1.Check if input string is null or empty
+        if(s==null || s.isEmpty())
+        {
+            throw new IllegalArgumentException("Input String is null or empty!");
+        }
+        //2.Initialize the StringBuilder to hold final string
+        StringBuilder result = new StringBuilder();
+        //3.Initialize a variable that will hold digits, current letter and a boolean variable that tracks if we have a character
+        // waiting to be printed
+        int digits = 0;
+        char curr_char = ' ';
+        boolean hasChar = false;
+        //4.Start a for loop to traverse through the entire string from 0 upto string length
+        for(int i=0;i<s.length();i++)
+        {
+            //5.Grab the character
+            char c = s.charAt(i);
+            //6.If it's a letter - store it
+            if(Character.isLetter(c))
+            {
+                if(hasChar)
+                {
+                    int count = (digits==0)?1:digits;
+                    for(int j=0;j<count;j++)
+                    {
+                        result.append(curr_char);
+                    }
+                    digits = 0; //reset for next round
+                }
+                curr_char = c;
+                hasChar = true;
+            }
+            //7.If it's a digit - build the number
+            else if(Character.isDigit(c))
+            {
+                while(i<s.length() && Character.isDigit(s.charAt(i))) //Use s.charAt(i) inside the while loop to get the fresh character
+                {
+                    digits = digits* 10 + Character.getNumericValue(s.charAt(i)); //Use s.charAt(i) inside the while loop to get the fresh
+                    i++; //moving main pointer forward
+                }
+                i--; //so that no character is skipped,as i was incremented in while loop
+            }
+        }
+        //7.flush out last character group after the loop ends
+        if(hasChar)
+        {
+            int count = (digits==0)?1:digits;
+            for(int j=0;j<count;j++)
+            {
+                result.append(curr_char);
+            }
+        }
+        //8.Return the result
+        return result.toString();
     }
 }
